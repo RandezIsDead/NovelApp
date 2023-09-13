@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/grey_circle"
+        android:src="@drawable/back"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="1dp"
+        android:contentDescription="@string/todo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/h1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_below="@+id/back"
+        android:layout_marginTop="80dp"
+        android:text="@string/enter_sex"
+        android:textSize="27sp"
+        android:fontFamily="@font/lato"
+        android:textColor="@color/grey" />
+
+    <LinearLayout
+        android:id="@+id/lin_man"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/h1"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:text="@string/im_male"
+            android:textColor="@color/cool"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:fontFamily="@font/lato"
+            android:background="@drawable/cool_underline"
+            android:layout_marginEnd="5dp"/>
+
+        <ImageView
+            android:id="@+id/to_female"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/female"
+            android:contentDescription="@string/todo"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_woman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/h1"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginTop="28dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/to_male"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/male"
+            android:layout_marginEnd="5dp"
+            android:padding="15dp"
+            android:background="@drawable/grey_underline"
+            android:contentDescription="@string/todo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:text="@string/im_female"
+            android:textColor="@color/cool"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:fontFamily="@font/lato"
+            android:background="@drawable/cool_underline" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/btn_grad">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cont"
+            android:textSize="16sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

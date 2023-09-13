@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/grey_circle"
+        android:src="@drawable/back"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="1dp"
+        android:contentDescription="@string/todo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/h1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_below="@+id/back"
+        android:layout_marginTop="80dp"
+        android:text="@string/enter_verify_code_text"
+        android:textSize="27sp"
+        android:fontFamily="@font/lato"
+        android:textColor="@color/grey" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/h5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_below="@id/h1"
+        android:layout_marginTop="32dp"
+        android:textSize="12sp"
+        android:textColor="@color/other_grey"
+        android:lineSpacingExtra="1sp"
+        android:gravity="center_vertical"
+        android:alpha="0.8"
+        android:fontFamily="@font/lato"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_below="@id/h5"
+        android:layout_marginTop="24dp"
+        android:textSize="14sp"
+        android:textColor="@color/grey"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/lato"/>
+
+    <com.randez_trying.novel.Views.VerificationEditText
+        android:id="@+id/input_var_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:fontFamily="@font/lato"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/err_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/input_var_c"
+        android:layout_marginTop="12dp"
+        android:text="@string/err_text"
+        android:textSize="14sp"
+        android:textColor="#FF1B41"
+        android:lineSpacingExtra="2sp"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/btn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/btn_grad">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cont"
+            android:textSize="16sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@id/btn_cont"
+        android:text="@string/send_again"
+        android:textSize="16sp"
+        android:textColor="@color/cool"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/again_inactive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@id/btn_cont"
+        android:text="@string/send_again"
+        android:textSize="16sp"
+        android:textColor="@color/other_grey"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

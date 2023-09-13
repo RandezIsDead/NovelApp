@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Novel</string>
+    <string name="todo">TODO</string>
+    <string name="novel">novel</string>
+    <string name="text_enter_e_mail">Введите ваш e-mail для входа</string>
+    <string name="email">Введите email</string>
+    <string name="el_problema">Проблемы со входом?</string>
+    <string name="_dfdfemail">Укажите email, на который зарегистрирован ваш аккаунт.</string>
+    <string name="google_enter">Войти через Google</string>
+    <string name="cont">Продолжить</string>
+    <string name="enter_verify_code_text">Введите ваш проверочный код</string>
+    <string name="send_again">Отправить повторно</string>
+    <string name="err_text">Произошла ошибка. Проверьте код.</string>
+    <string name="after_enter">После введения данных в поле, Вы не сможете его изменить.</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="en">Введите ваше имя</string>
+    <string name="enter_bd">Укажите вашу дату рождения</string>
+    <string name="_16_more">Приложение предназначено для лиц старше 16 лет.</string>
+    <string name="auto_or_manual">Ваш город будет определён автоматически или можете указать его вручную</string>
+    <string name="enter_loc">Укажите ваше местоположение</string>
+    <string name="manually">Указать геолокацию вручную</string>
+    <string name="moskow">Москва</string>
+    <string name="or_manual">Укажите город вручную</string>
+    <string name="add_photos_text">Добавте фотографии для профиля</string>
+    <string name="app_will_select">Приложение выберет фото для профиля, можно будет редактировать в настройках</string>
+    <string name="_more">Не менее 4 фотографий</string>
+    <string name="enter_sex">Укажите ваш пол</string>
+    <string name="im_male">Я мужчина</string>
+    <string name="im_female">Я женщина</string>
+    <string name="about_me_shortly">Напишите краткое описание о себе</string>
+    <string name="ert">Напишите краткую информацию о себе для привлечения внимания других пользователей</string>
+    <string name="_55_more">до 55 символов</string>
+    <string name="extra_text">Для продолжения\nзаполните данные</string>
+</resources>
