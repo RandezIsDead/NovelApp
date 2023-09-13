@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.JsonArray;
 import com.randez_trying.novel.Activities.Registration.EnterNameActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
@@ -25,7 +24,6 @@ import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -142,9 +140,9 @@ public class VerifyEmailActivity extends AppCompatActivity {
                 response -> {
                     try {
                         JSONObject o = new JSONObject(response);
-                        JSONObject jsonObject = o.getJSONObject("0");
 
                         if (!o.getBoolean("error")) {
+                            JSONObject jsonObject = o.getJSONObject("0");
                             String personalId = jsonObject.getString("personalId");
                             String bDate = Encrypt.decode(jsonObject.getString("bDate").getBytes(), personalId);
                             String balance = Encrypt.decode(jsonObject.getString("balance").getBytes(), personalId);
