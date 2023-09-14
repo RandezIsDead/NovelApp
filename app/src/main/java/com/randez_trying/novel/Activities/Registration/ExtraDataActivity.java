@@ -40,6 +40,7 @@ public class ExtraDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_extra_data);
 
+        ImageView back = findViewById(R.id.back);
         RecyclerView recyclerView = findViewById(R.id.rec_extra);
         RelativeLayout cont = findViewById(R.id.btn_cont);
 
@@ -47,6 +48,10 @@ public class ExtraDataActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(new ExtraDataAdapter(getApplicationContext()));
 
+        back.setOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+        });
         cont.setOnClickListener(v -> {
             StaticHelper.myCredentials.setPersonalId(UUID.randomUUID().toString());
             StaticHelper.me.setPersonalId(StaticHelper.myCredentials.getPersonalId());
@@ -57,7 +62,7 @@ public class ExtraDataActivity extends AppCompatActivity {
                                     Prefs.saveMe(getApplicationContext(), StaticHelper.me);
                                     startActivity(new Intent(ExtraDataActivity.this, MainActivity.class));
                                     finish();
-                                    overridePendingTransition(0, 0);
+                                    overridePendingTransition(R.anim.right_in, R.anim.left_out);
                                 },
                                 System.out::println){
                             @Override

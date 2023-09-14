@@ -29,6 +29,10 @@
     <string name="im_female">Я женщина</string>
     <string name="about_me_shortly">Напишите краткое описание о себе</string>
     <string name="ert">Напишите краткую информацию о себе для привлечения внимания других пользователей</string>
-    <string name="_55_more">до 55 символов</string>
+    <string name="_55_more">до 300 символов</string>
     <string name="extra_text">Для продолжения\nзаполните данные</string>
+    <string name="d">Д</string>
+    <string name="m">М</string>
+    <string name="y">Г</string>
+    <string name="select_acc">Выберите аккаунт через который хотите войти</string>
 </resources>

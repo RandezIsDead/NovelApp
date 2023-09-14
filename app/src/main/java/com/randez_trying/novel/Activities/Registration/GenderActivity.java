@@ -30,7 +30,7 @@ public class GenderActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             finish();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
         toFemale.setOnClickListener(v -> {
             man.setVisibility(View.GONE);
@@ -45,7 +45,7 @@ public class GenderActivity extends AppCompatActivity {
         cont.setOnClickListener(v -> {
             StaticHelper.me.setGender(isManSelected ? "male" : "female");
             startActivity(new Intent(GenderActivity.this, AboutMeActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         });
     }
 }

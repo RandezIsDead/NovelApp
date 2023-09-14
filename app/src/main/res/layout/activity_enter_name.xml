@@ -56,7 +56,7 @@
         android:layout_marginRight="42dp"
         android:layout_marginTop="28dp"
         android:backgroundTint="@color/other_grey"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textCapWords"
         android:textColor="@color/grey"
         android:hint="@string/enter_name"
         android:fontFamily="@font/lato"

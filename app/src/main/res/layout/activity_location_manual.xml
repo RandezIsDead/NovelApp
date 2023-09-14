@@ -25,7 +25,8 @@
         android:layout_marginRight="42dp"
         android:layout_below="@+id/back"
         android:layout_marginTop="80dp"
-        android:src="@drawable/pip"/>
+        android:src="@drawable/pip"
+        android:contentDescription="@string/todo" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/h5"
@@ -43,7 +44,6 @@
         android:alpha="0.8"
         android:fontFamily="@font/lato"/>
 
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/input_varia"
         android:layout_width="match_parent"
@@ -56,9 +56,7 @@
         android:inputType="text"
         android:textSize="27sp"
         android:textColor="@color/light_grey"
-        android:fontFamily="@font/lato"
-        android:hint="@string/moskow"
-        android:textColorHint="@color/light_grey"/>
+        android:fontFamily="@font/lato"/>
 
     <RelativeLayout
         android:id="@+id/btn_cont"
@@ -82,17 +80,17 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/rookami"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/lv_hints"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_cont"
-        android:layout_marginTop="16dp"
-        android:text="@string/manually"
-        android:textSize="16sp"
-        android:textColor="@color/light_grey"
-        android:gravity="center_horizontal|center_vertical"
-        android:fontFamily="@font/lato"/>
+        android:layout_below="@id/input_varia"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/light_grey"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>

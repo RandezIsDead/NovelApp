@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Novel"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name=".Activities.Registration.EnterBirthDateActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.VerifyEmailActivity" />
         <activity android:name=".Activities.Registration.EnterNameActivity" />
-        <activity android:name=".Activities.Registration.EnterBirthDateActivity" />
+<!--        <activity android:name=".Activities.Registration.EnterBirthDateActivity" />-->
         <activity android:name=".Activities.Registration.LocationActivity" />
         <activity android:name=".Activities.Registration.LocationManualActivity" />
         <activity android:name=".Activities.Registration.AddPhotosActivity" />

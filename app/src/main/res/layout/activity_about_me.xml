@@ -43,9 +43,10 @@
       android:layout_marginBottom="16dp"
       android:gravity="top|start"
       android:backgroundTint="@color/cool"
-      android:inputType="text"
+      android:inputType="text|textCapWords|textMultiLine"
+
       android:textSize="14sp"
-      android:maxLength="55"
+      android:maxLength="300"
       android:textColor="@color/cool"
       android:fontFamily="@font/lato"/>
 

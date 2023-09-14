@@ -1,5 +1,6 @@
 package com.randez_trying.novel.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -76,6 +77,7 @@ public class VerificationEditText extends AppCompatEditText {
         int height = getHeight() - getPaddingBottom();
         Editable text = getText();
         int length = text.length();
+        @SuppressLint("DrawAllocation")
         float[] fArr = new float[length];
         getPaint().getTextWidths(getText(), 0, length, fArr);
         int i2 = 0;

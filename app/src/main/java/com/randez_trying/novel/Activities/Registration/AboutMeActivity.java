@@ -2,8 +2,12 @@ package com.randez_trying.novel.Activities.Registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,12 +28,25 @@ public class AboutMeActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             finish();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
         cont.setOnClickListener(v -> {
             StaticHelper.me.setAbout(text.getText().toString().trim());
             startActivity(new Intent(AboutMeActivity.this, ExtraDataActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

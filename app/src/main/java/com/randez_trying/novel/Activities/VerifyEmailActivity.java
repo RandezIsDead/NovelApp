@@ -1,14 +1,21 @@
 package com.randez_trying.novel.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,13 +30,13 @@ import com.randez_trying.novel.Database.StaticHelper;
 import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
+import com.randez_trying.novel.Views.VerificationEditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyEmailActivity extends AppCompatActivity {
@@ -56,24 +63,61 @@ public class VerifyEmailActivity extends AppCompatActivity {
         setTextGradient(this.sendAgain);
         countdown();
 
-        ((TextView) findViewById(R.id.h5)).setText("На указанный E-mail " + this.email + " поступит письмо с кодом. Укажите данные кода...");
-        findViewById(R.id.back).setOnClickListener(v -> {
+        TextView text = findViewById(R.id.h5);
+        ImageView back = findViewById(R.id.back);
+        EditText enter = findViewById(R.id.input_var_c);
+        TextView errText = findViewById(R.id.err_text);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout load = findViewById(R.id.rel_load);
+
+        text.setText("На указанный E-mail " + this.email + " поступит письмо с кодом. Укажите данные кода...");
+
+        back.setOnClickListener(v -> {
             finish();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
         this.sendAgain.setOnClickListener(v -> {
-            this.secondsLeft = 60*5;
+            secondsLeft = 60*5;
             verify();
             countdown();
-            this.sendAgain.setVisibility(View.GONE);
-            this.sendAgainInactive.setVisibility(View.VISIBLE);
+            sendAgain.setVisibility(View.GONE);
+            sendAgainInactive.setVisibility(View.VISIBLE);
         });
-        findViewById(R.id.btn_cont).setOnClickListener(v -> {
-            TextView textView = findViewById(R.id.err_text);
-            String trim = Objects.requireNonNull(((EditText) findViewById(R.id.input_var_c)).getText()).toString().trim();
-            if (trim.length() < 4) textView.setVisibility(View.VISIBLE);
+
+        enter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String enteredCode = s.toString().trim();
+
+                if (enteredCode.length() == 4) {
+                    if (enteredCode.equals(String.valueOf(code))) {
+                        View view = enter.findFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+
+                        cont.setVisibility(View.GONE);
+                        sendAgain.setVisibility(View.GONE);
+                        sendAgainInactive.setVisibility(View.GONE);
+                        load.setVisibility(View.VISIBLE);
+                        loginOrRegister();
+                    } else errText.setVisibility(View.VISIBLE);
+                } else {
+                    errText.setVisibility(View.GONE);
+                }
+            }
+        });
+        cont.setOnClickListener(v -> {
+            String trim = enter.getText().toString().trim();
+            if (trim.length() < 4) errText.setVisibility(View.VISIBLE);
             else if (trim.equals(String.valueOf(this.code))) loginOrRegister();
-            else textView.setVisibility(View.VISIBLE);
+            else errText.setVisibility(View.VISIBLE);
         });
     }
 
@@ -97,25 +141,33 @@ public class VerifyEmailActivity extends AppCompatActivity {
     public void countdown() {
         Runnable runnable = this::countdown;
         String str;
-        int i = this.secondsLeft;
-        if (i > 0) {
-            int i2 = i - 1;
-            this.secondsLeft = i2;
-            long j = ((long) i2) * 1000;
+        if (secondsLeft > 0) {
+            secondsLeft -= 1;
+            long j = ((long) secondsLeft) * 1000;
             long minutes = TimeUnit.MILLISECONDS.toMinutes(j);
             long seconds = TimeUnit.MILLISECONDS.toSeconds(j - TimeUnit.MINUTES.toMillis(minutes));
-            if (seconds < 10) {
-                str = "0" + seconds;
-            } else {
-                str = String.valueOf(seconds);
-            }
-            this.timer.setText(minutes + ":" + str);
-            this.handler.postDelayed(runnable, 1000);
+            if (seconds < 10) str = "0" + seconds;
+            else str = String.valueOf(seconds);
+            timer.setText(minutes + ":" + str);
+            handler.postDelayed(runnable, 1000);
             return;
         }
         this.sendAgain.setVisibility(View.VISIBLE);
         this.sendAgainInactive.setVisibility(View.GONE);
         this.handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof VerificationEditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     private void setTextGradient(TextView textView) {
@@ -144,64 +196,42 @@ public class VerifyEmailActivity extends AppCompatActivity {
                         if (!o.getBoolean("error")) {
                             JSONObject jsonObject = o.getJSONObject("0");
                             String personalId = jsonObject.getString("personalId");
-                            String bDate = Encrypt.decode(jsonObject.getString("bDate").getBytes(), personalId);
-                            String balance = Encrypt.decode(jsonObject.getString("balance").getBytes(), personalId);
-                            String city = Encrypt.decode(jsonObject.getString("city").getBytes(), personalId);
-                            String company = Encrypt.decode(jsonObject.getString("company").getBytes(), personalId);
-                            String education = Encrypt.decode(jsonObject.getString("education").getBytes(), personalId);
-                            String growth = Encrypt.decode(jsonObject.getString("growth").getBytes(), personalId);
-                            String interests = Encrypt.decode(jsonObject.getString("interests").getBytes(), personalId);
-                            String job = Encrypt.decode(jsonObject.getString("job").getBytes(), personalId);
-                            String languages = Encrypt.decode(jsonObject.getString("languages").getBytes(), personalId);
-                            String mediaLinks = Encrypt.decode(jsonObject.getString("mediaLinks").getBytes(), personalId);
-                            String name = Encrypt.decode(jsonObject.getString("name").getBytes(), personalId);
-                            String gender = Encrypt.decode(jsonObject.getString("gender").getBytes(), personalId);
-                            String about = Encrypt.decode(jsonObject.getString("about").getBytes(), personalId);
-                            String orientation = Encrypt.decode(jsonObject.getString("orientation").getBytes(), personalId);
-                            String familyPlans = Encrypt.decode(jsonObject.getString("familyPlans").getBytes(), personalId);
-                            String sports = Encrypt.decode(jsonObject.getString("sports").getBytes(), personalId);
-                            String alcohol = Encrypt.decode(jsonObject.getString("alcohol").getBytes(), personalId);
-                            String smoke = Encrypt.decode(jsonObject.getString("smoke").getBytes(), personalId);
-                            String personalityType = Encrypt.decode(jsonObject.getString("personalityType").getBytes(), personalId);
-                            String socialMediaLinks = Encrypt.decode(jsonObject.getString("socialMediaLinks").getBytes(), personalId);
-                            String status = Encrypt.decode(jsonObject.getString("status").getBytes(), personalId);
-                            String subscriptionType = Encrypt.decode(jsonObject.getString("subscriptionType").getBytes(), personalId);
-                            String zodiacSign = Encrypt.decode(jsonObject.getString("zodiacSign").getBytes(), personalId);
 
                             User me = new User(
-                                    bDate,
-                                    balance,
-                                    city,
-                                    company,
-                                    education,
-                                    growth,
+                                    Encrypt.decode(jsonObject.getString("bDate").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("balance").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("city").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("company").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("education").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("growth").getBytes(), personalId),
                                     null,
-                                    interests,
-                                    job,
-                                    languages,
-                                    mediaLinks,
-                                    name,
-                                    gender,
-                                    about,
-                                    orientation,
-                                    familyPlans,
-                                    sports,
-                                    alcohol,
-                                    smoke,
+                                    Encrypt.decode(jsonObject.getString("interests").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("job").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("languages").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("mediaLinks").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("name").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("gender").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("about").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("orientation").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("familyPlans").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("sports").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("alcohol").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("smoke").getBytes(), personalId),
                                     personalId,
-                                    personalityType,
-                                    socialMediaLinks,
-                                    status,
-                                    subscriptionType,
-                                    zodiacSign
+                                    Encrypt.decode(jsonObject.getString("personalityType").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("socialMediaLinks").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("status").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("subscriptionType").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("zodiacSign").getBytes(), personalId)
                             );
                             Prefs.saveMe(getApplicationContext(), me);
                             startActivity(new Intent(this, MainActivity.class));
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
                             finish();
                         } else {
                             StaticHelper.myCredentials.setEmail(this.email);
                             startActivity(new Intent(this, EnterNameActivity.class));
-                            overridePendingTransition(0, 0);
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

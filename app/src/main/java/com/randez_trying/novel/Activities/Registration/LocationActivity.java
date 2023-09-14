@@ -28,30 +28,34 @@ public class LocationActivity extends AppCompatActivity {
         RelativeLayout cont = findViewById(R.id.btn_cont);
         TextView manual = findViewById(R.id.rookami);
 
+        getCity();
+
         back.setOnClickListener(v -> {
             finish();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
-        cont.setOnClickListener(v -> {
-            if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0 || ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
-                double[] location = getLocation();
-                try {
-                    String locality = new Geocoder(this, new Locale("ru", "RU")).getFromLocation(location[0], location[1], 1).get(0).getLocality();
-                    Intent intent = new Intent(this, LocationManualActivity.class);
-                    intent.putExtra("city", locality);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"}, 476);
-            }
-        });
+        cont.setOnClickListener(v -> getCity());
         manual.setOnClickListener(v -> {
             startActivity(new Intent(this, LocationManualActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         });
+    }
+
+    private void getCity() {
+        if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0 || ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
+            double[] location = getLocation();
+            try {
+                String locality = new Geocoder(this, new Locale("ru", "RU")).getFromLocation(location[0], location[1], 1).get(0).getLocality();
+                Intent intent = new Intent(this, LocationManualActivity.class);
+                intent.putExtra("city", locality);
+                startActivity(intent);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"}, 476);
+        }
     }
 
     public double[] getLocation() {

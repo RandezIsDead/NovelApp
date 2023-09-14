@@ -1,5 +1,7 @@
 package com.randez_trying.novel.Activities.Registration;
 
+import static android.content.Intent.ACTION_GET_CONTENT;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -46,8 +49,10 @@ import java.util.Map;
 public class AddPhotosActivity extends AppCompatActivity {
 
     private final Handler handler = new Handler();
+    private final List<PhotosAdapter.ViewHolder> holders = new ArrayList<>();
+
+
     private final List<String> photoUrls = new ArrayList<>();
-    private final List<ImageView> photos = new ArrayList<>();
     private int currentPhoto = 0;
     private boolean canClick = true;
     private RelativeLayout cont, contInactive;
@@ -61,16 +66,6 @@ public class AddPhotosActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.h3);
         setTextGradient(text);
 
-        photoUrls.add("&");
-        photoUrls.add("&");
-        photoUrls.add("&");
-        photoUrls.add("&");
-
-        photos.add(null);
-        photos.add(null);
-        photos.add(null);
-        photos.add(null);
-
         cont = findViewById(R.id.btn_cont);
         contInactive = findViewById(R.id.btn_cont_inactive);
 
@@ -83,54 +78,77 @@ public class AddPhotosActivity extends AppCompatActivity {
 
         back.setOnClickListener(v -> {
             finish();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
         cont.setOnClickListener(v -> {
             startActivity(new Intent(AddPhotosActivity.this, GenderActivity.class));
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         });
     }
 
-    ActivityResultLauncher<String> getContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-            uri -> {
-                if (uri != null) {
-                    try {
-                        InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(uri);
-                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                        String imgEncode = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_UPLOAD_IMAGE,
-                                response -> {
-                                    photos.get(currentPhoto).setPadding(0 ,0, 0, 0);
-                                    RequestOptions requestOptions = new RequestOptions();
-                                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
-                                    Glide.with(getApplicationContext()).load(Base64.decode(imgEncode.getBytes(), Base64.DEFAULT))
-                                            .apply(requestOptions).into(photos.get(currentPhoto));
-                                    photoUrls.set(currentPhoto, Constants.ROOT_URL + response);
-                                    canClick = true;
-                                },
-                                System.out::println){
-                            @Override
-                            protected Map<String, String> getParams() {
-                                Map<String, String> params = new HashMap<>();
-                                params.put("image", imgEncode);
-
-                                return params;
+    ActivityResultLauncher<Intent> getContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result != null) {
+                    Intent data = result.getData();
+                    List<Uri> uris = new ArrayList<>();
+                    if (data != null) {
+                        if (data.getClipData() != null) {
+                            for (int i = 0; i < data.getClipData().getItemCount(); i++) {
+                                uris.add(data.getClipData().getItemAt(i).getUri());
                             }
-                        };
+                        } else if (data.getData() != null) uris.add(data.getData());
+                    }
 
-                        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-                        canClick = false;
+                    List<String> encodings = new ArrayList<>();
+
+                    try {
+                        for (int i = 0; i < uris.size(); i++) {
+                            InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(uris.get(i));
+                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                            BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                            encodings.add(Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT));
+                        }
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+
+                    for (int i = 0; i < encodings.size(); i++) {
+                        if (i < 4) {
+                            StringRequest stringRequest = getStringRequest(encodings.get(i));
+                            RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+                        }
+                    }
+                    canClick = false;
                 }
             });
 
+    @NonNull
+    private StringRequest getStringRequest(String encode) {
+        return new StringRequest(Request.Method.POST, Constants.URL_UPLOAD_IMAGE,
+                response -> {
+                    holders.get(currentPhoto).photo.setPadding(0 ,0, 0, 0);
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
+                    Glide.with(getApplicationContext()).load(Base64.decode(encode.getBytes(), Base64.DEFAULT))
+                            .apply(requestOptions).into(holders.get(currentPhoto).photo);
+                    photoUrls.add(Constants.ROOT_URL + response);
+                    canClick = true;
+                    currentPhoto++;
+                },
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", encode);
+
+                return params;
+            }
+        };
+    }
+
     private void checkPhotos() {
         Runnable runnable = this::checkPhotos;
-        if (!photoUrls.get(0).equals("&") && !photoUrls.get(1).equals("&") && !photoUrls.get(2).equals("&") && !photoUrls.get(3).equals("&")) {
+        if (photoUrls.size() == 4) {
             StaticHelper.me.setMediaLinks(String.join("&", photoUrls));
             contInactive.setVisibility(View.GONE);
             cont.setVisibility(View.VISIBLE);
@@ -161,16 +179,19 @@ public class AddPhotosActivity extends AppCompatActivity {
         @NonNull
         @Override
         public PhotosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false));
+            ViewHolder holder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false));
+            holders.add(holder);
+            return holder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull PhotosAdapter.ViewHolder holder, int position) {
             if (canClick) {
                 holder.photo.setOnClickListener(v -> {
-                    currentPhoto = holder.getAdapterPosition();
-                    photos.set(holder.getAdapterPosition(), holder.photo);
-                    getContent.launch("image/*");
+                    Intent intent = new Intent(ACTION_GET_CONTENT);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.setType("*/*");
+                    getContent.launch(intent);
                 });
             }
         }
