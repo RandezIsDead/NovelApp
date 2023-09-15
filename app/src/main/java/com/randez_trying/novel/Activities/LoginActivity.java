@@ -1,21 +1,16 @@
 package com.randez_trying.novel.Activities;
 
-import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.common.AccountPicker;
 import com.google.android.material.snackbar.Snackbar;
 import com.randez_trying.novel.Activities.Registration.EnterNameActivity;
 import com.randez_trying.novel.Database.Constants;
@@ -37,8 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -50,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText emailEnter = findViewById(R.id.input_varia);
         TextView problem = findViewById(R.id.btn_problem);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
         RelativeLayout google = findViewById(R.id.btn_google);
 
         setTextGradient(findViewById(R.id.app_name));
@@ -68,27 +62,19 @@ public class LoginActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
         });
         google.setOnClickListener(v -> {
-            Account[] accounts = AccountManager.get(this).getAccountsByType("com.google");
-            List<String> possibleEmails = new LinkedList<>();
-
-            for (Account account : accounts) possibleEmails.add(account.name);
-
-            if (!possibleEmails.isEmpty() && possibleEmails.get(0) != null) {
-                Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
-
-                dialogWindow.setContentView(R.layout.alert_google_sign_in);
-                dialogWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                ListView listView = dialogWindow.findViewById(R.id.rec_accounts);
-                listView.setAdapter(new ArrayAdapter<>(this, R.layout.item_text, possibleEmails));
-                listView.setOnItemClickListener((parent, view, position, id) -> {
-                    loginOrRegister(possibleEmails.get(position));
-                    dialogWindow.dismiss();
-                });
-
-                dialogWindow.show();
-            }
+            Intent intent = AccountPicker.newChooseAccountIntent(null, null,
+                    new String[] {"com.google", "com.google.android.legacyimap"},
+                    false, null, null, null, null);
+            startActivityForResult(intent, 135);
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 135 && resultCode == RESULT_OK) {
+            loginOrRegister(data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME));
+        }
     }
 
     private void loginOrRegister(String email) {

@@ -58,7 +58,7 @@
         android:textColor="@color/light_grey" />
 
     <RelativeLayout
-        android:id="@+id/btn_cont"
+        android:id="@+id/btn_fix_internet"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="42dp"
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_cont"
+        android:layout_below="@id/btn_fix_internet"
         android:layout_marginTop="16dp"
         android:text="@string/manually"
         android:textSize="16sp"

@@ -23,7 +23,7 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
 
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
         EditText text = findViewById(R.id.input_varia);
 
         back.setOnClickListener(v -> {

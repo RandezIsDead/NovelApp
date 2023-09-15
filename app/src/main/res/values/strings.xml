@@ -35,4 +35,12 @@
     <string name="m">М</string>
     <string name="y">Г</string>
     <string name="select_acc">Выберите аккаунт через который хотите войти</string>
+    <string name="open_settings">Открыть настройки</string>
+    <string name="check_conn">Проверьте подключенте к интернету</string>
+    <string name="failed_to_load_data">Не удалось загрузить данные</string>
+    <string name="get_boost">Получить\nБусты</string>
+    <string name="crystal_shop">Магазин\nКристаллов</string>
+    <string name="invisible_mode">Невидимый\nрежим</string>
+    <string name="err_more4photo">Вы выбрали больше 4 фото. Попробуйте снова.</string>
+    <string name="delete_photo">Удалить фото</string>
 </resources>

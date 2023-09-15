@@ -4,11 +4,21 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp">
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="10dp"
+        android:padding="3dp"
+        android:visibility="gone"
+        android:contentDescription="@string/todo"/>
+
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_toStartOf="@id/select_btn"
+        android:layout_toEndOf="@id/image"
         android:layout_centerVertical="true"
         android:textSize="16sp"
         android:textColor="@color/cool"
@@ -24,5 +34,12 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:contentDescription="@string/todo"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/some_other_grey"
+        android:layout_below="@id/text"
+        android:layout_marginTop="4dp"/>
 
 </RelativeLayout>

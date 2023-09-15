@@ -16,24 +16,36 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
+import com.randez_trying.novel.Database.Constants;
+import com.randez_trying.novel.Database.RequestHandler;
 import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LocationManualActivity extends AppCompatActivity {
 
-    String cities = "Королёв&Москва&Санкт-Петербург&Новосибирск&Екатеринбург&Казань&Нижний Новгород&Ростов-на-Дону&Хабаровск&Владивосток&Пятигорск&Красноярск"
-            + "Челябинск&Самара&Уфа&Краснодар&Омск&Воронеж&Пермь&Волгоград&Саратов&Тюмень&Барнаул&Махачкала&Ижевск&Севастополь&Томск&Ставрополь&Минск&Гомель&Витебск";
+    private EditText editText;
+    private ListView listView;
 
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_location_manual);
 
+        editText = findViewById(R.id.input_varia);
+        listView = findViewById(R.id.lv_hints);
         ImageView back = findViewById(R.id.back);
-        EditText editText = findViewById(R.id.input_varia);
-        ListView listView = findViewById(R.id.lv_hints);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        getCities();
 
         back.setOnClickListener(v -> {
             finish();
@@ -41,38 +53,61 @@ public class LocationManualActivity extends AppCompatActivity {
         });
 
         editText.setText(getIntent().getStringExtra("city"));
-        final String[] split = this.cities.split("&");
-
-        editText.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable editable) {}
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
-
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if (!charSequence.toString().trim().isEmpty()) {
-                    ArrayList<String> arrayList = new ArrayList<>();
-                    for (String str : split) {
-                        if (str.toLowerCase().startsWith(charSequence.toString().trim().toLowerCase())) {
-                            arrayList.add(str);
-                        }
-                    }
-                    listView.setVisibility(View.VISIBLE);
-                    listView.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.item_text, arrayList));
-                    listView.setOnItemClickListener((parent, view, position, id) -> {
-                        editText.setText(arrayList.get(position));
-                        listView.setVisibility(View.GONE);
-                    });
-//                    for (int i4 = 0; i4 < arrayList.size(); i4++) {
-//                        System.out.print(arrayList.get(i4) + " ");
-//                    }
-                } else listView.setVisibility(View.GONE);
-            }
-        });
         cont.setOnClickListener(v -> {
-            String city = editText.getText().toString().trim();
-            StaticHelper.me.setCity(city);
-            startActivity(new Intent(LocationManualActivity.this, AddPhotosActivity.class));
-            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            if (!editText.getText().toString().isEmpty()) {
+                String city = editText.getText().toString().trim();
+                StaticHelper.me.setCity(city);
+                startActivity(new Intent(LocationManualActivity.this, AddPhotosActivity.class));
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            } else Snackbar.make(v, "Поле не может быть пустым", Snackbar.LENGTH_SHORT).show();
         });
+    }
+
+    private void getCities() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_GET_CITIES,
+                response -> {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        final String[] split = new String[array.length()];
+                        for (int i = 0; i < array.length(); i++) {
+                            split[i] = Encrypt.decode(array.getJSONObject(i).getString("city").getBytes(), "0");
+                        }
+
+                        editText.addTextChangedListener(new TextWatcher() {
+                            public void afterTextChanged(Editable editable) {}
+                            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+
+                            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                                if (!charSequence.toString().trim().isEmpty()) {
+                                    ArrayList<String> arrayList = new ArrayList<>();
+                                    for (String str : split) {
+                                        if (str.toLowerCase().startsWith(charSequence.toString().trim().toLowerCase())) {
+                                            arrayList.add(str);
+                                        }
+                                    }
+                                    listView.setVisibility(View.VISIBLE);
+                                    listView.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.item_text, arrayList));
+                                    listView.setOnItemClickListener((parent, view, position, id) -> {
+                                        editText.setText(arrayList.get(position));
+                                        listView.setVisibility(View.GONE);
+                                    });
+                                } else listView.setVisibility(View.GONE);
+                            }
+                        });
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                return new HashMap<>();
+            }
+        };
+
+        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     @Override

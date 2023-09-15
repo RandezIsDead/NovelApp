@@ -24,6 +24,8 @@ public class Constants {
     public static final String URL_GET_USER_BY_ID = "https://scripsit-itaque.ru/novel/users/getUserById.php";
     public static final String URL_GET_USER_BY_NAME = "https://scripsit-itaque.ru/novel/users/getUserByName.php";
     public static final String URL_LOGIN = "https://scripsit-itaque.ru/novel/users/userLogin.php";
+    public static final String URL_GET_CITIES = "https://scripsit-itaque.ru/novel/getCities.php";
+    public static final String URL_GET_INTERESTS = "https://scripsit-itaque.ru/novel/getInterests.php";
     public static final String URL_REGISTER = "https://scripsit-itaque.ru/novel/users/registerUser.php";
     public static final String URL_REGISTER_2 = "https://scripsit-itaque.ru/novel/users/regUser2.php";
     public static final String URL_REMOVE_DIALOG = "https://scripsit-itaque.ru/novel/dialogs/removeDialog.php";

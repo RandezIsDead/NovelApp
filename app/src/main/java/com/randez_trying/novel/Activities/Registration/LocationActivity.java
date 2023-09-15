@@ -25,7 +25,7 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
 
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
         TextView manual = findViewById(R.id.rookami);
 
         getCity();
@@ -51,7 +51,7 @@ public class LocationActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else {
             ActivityCompat.requestPermissions(this, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"}, 476);

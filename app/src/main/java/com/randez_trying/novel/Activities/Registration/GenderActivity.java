@@ -26,7 +26,7 @@ public class GenderActivity extends AppCompatActivity {
         LinearLayout woman = findViewById(R.id.lin_woman);
         ImageView toMale = findViewById(R.id.to_male);
         ImageView toFemale = findViewById(R.id.to_female);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
 
         back.setOnClickListener(v -> {
             finish();

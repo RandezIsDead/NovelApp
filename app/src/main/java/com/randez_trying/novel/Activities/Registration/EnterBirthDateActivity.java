@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.randez_trying.novel.Database.StaticHelper;
 import com.randez_trying.novel.R;
@@ -34,7 +35,8 @@ public class EnterBirthDateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter_birth_date);
 
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+
 
         et1 = findViewById(R.id.et1);
         et2 = findViewById(R.id.et2);
@@ -45,27 +47,6 @@ public class EnterBirthDateActivity extends AppCompatActivity {
         et7 = findViewById(R.id.et7);
         et8 = findViewById(R.id.et8);
 
-//        et[0].setOnClickListener(listener);
-//        et[1].setOnClickListener(listener);
-//        et[2].setOnClickListener(listener);
-//        et[3].setOnClickListener(listener);
-//        et[4].setOnClickListener(listener);
-//        et[5].setOnClickListener(listener);
-//        et[6].setOnClickListener(listener);
-//        et[7].setOnClickListener(listener);
-
-//        LinearLayout iv = findViewById(R.id.input_varia);
-//
-//        iv.setOnClickListener(v -> {
-//            System.out.println("CLICK");
-//            for (EditText editText : et) {
-//                String text = editText.getText().toString();
-//                if (!text.isEmpty()) {
-//                    editText.requestFocus();
-//                }
-//            }
-//        });
-
         et1.addTextChangedListener(new GenericTextWatcher(et1, et2));
         et2.addTextChangedListener(new GenericTextWatcher(et2, et3));
         et3.addTextChangedListener(new GenericTextWatcher(et3, et4));
@@ -74,6 +55,7 @@ public class EnterBirthDateActivity extends AppCompatActivity {
         et6.addTextChangedListener(new GenericTextWatcher(et6, et7));
         et7.addTextChangedListener(new GenericTextWatcher(et7, et8));
 
+        et2.setOnKeyListener(new GenericKeyEvent(et2, et1));
         et2.setOnKeyListener(new GenericKeyEvent(et2, et1));
         et3.setOnKeyListener(new GenericKeyEvent(et3, et2));
         et4.setOnKeyListener(new GenericKeyEvent(et4, et3));
@@ -107,29 +89,6 @@ public class EnterBirthDateActivity extends AppCompatActivity {
                     }
                 });
     }
-
-//    View.OnClickListener listener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            for (int i = 0; i < et.length; i++) {
-//                if (v.equals(et[i])) {
-//                    if (et[i].getText().toString().isEmpty()) {
-//                        for (int j = i; j > 0; j--) {
-//                            if (!et[j].getText().toString().isEmpty()) {
-//                                et[j+1].requestFocus();
-//                            }
-//                        }
-//                    } else {
-//                        for (int j = i; j < et.length; j++) {
-//                            if (et[j].getText().toString().isEmpty()) {
-//                                et[j].requestFocus();
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    };
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

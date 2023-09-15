@@ -23,7 +23,7 @@ public class EnterNameActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
         });
-        findViewById(R.id.btn_cont).setOnClickListener(v -> {
+        findViewById(R.id.btn_fix_internet).setOnClickListener(v -> {
                     String trim = ((EditText) findViewById(R.id.input_varia)).getText().toString().trim();
                     if (trim.length() > 1) {
                         StaticHelper.me.setName(trim.substring(0, 1).toUpperCase() + trim.substring(1).toLowerCase());

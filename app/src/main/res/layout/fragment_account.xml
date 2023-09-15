@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/user_ico"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:contentDescription="@string/todo"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_ico"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/username_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/lato"
+            android:textStyle="bold"/>
+        
+        <ImageView
+            android:id="@+id/verified"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/verified"
+            android:layout_toEndOf="@id/username_age"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/todo"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btns_premium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rel_user"
+        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:baselineAligned="false">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/light_bg"
+            android:elevation="1dp"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/boost"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/h5_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img1"
+                android:layout_marginTop="5dp"
+                android:text="@string/get_boost"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textColor="@color/violet_one"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal|center_vertical" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/light_bg"
+            android:elevation="1dp"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/crystals"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/h5_medium2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img2"
+                android:layout_marginTop="5dp"
+                android:text="@string/crystal_shop"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal|center_vertical" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/light_bg"
+            android:elevation="1dp">
+
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/invisible"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/h5_medium3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img3"
+                android:layout_marginTop="5dp"
+                android:text="@string/invisible_mode"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textColor="@color/violet_two"
+                android:fontFamily="@font/lato"
+                android:gravity="center_horizontal|center_vertical" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btns_premium"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+    </RelativeLayout>
+
+</RelativeLayout>

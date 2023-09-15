@@ -67,7 +67,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
         ImageView back = findViewById(R.id.back);
         EditText enter = findViewById(R.id.input_var_c);
         TextView errText = findViewById(R.id.err_text);
-        RelativeLayout cont = findViewById(R.id.btn_cont);
+        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
         RelativeLayout load = findViewById(R.id.rel_load);
 
         text.setText("На указанный E-mail " + this.email + " поступит письмо с кодом. Укажите данные кода...");

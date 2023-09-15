@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,6 +55,7 @@ public class AddPhotosActivity extends AppCompatActivity {
 
 
     private final List<String> photoUrls = new ArrayList<>();
+    private final List<Boolean> loadedPhotos = new ArrayList<>();
     private int currentPhoto = 0;
     private boolean canClick = true;
     private RelativeLayout cont, contInactive;
@@ -66,13 +69,18 @@ public class AddPhotosActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.h3);
         setTextGradient(text);
 
-        cont = findViewById(R.id.btn_cont);
+        cont = findViewById(R.id.btn_fix_internet);
         contInactive = findViewById(R.id.btn_cont_inactive);
 
         RecyclerView recyclerView = findViewById(R.id.rec_photos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new PhotosAdapter(getApplicationContext()));
+
+        loadedPhotos.add(false);
+        loadedPhotos.add(false);
+        loadedPhotos.add(false);
+        loadedPhotos.add(false);
 
         checkPhotos();
 
@@ -99,26 +107,31 @@ public class AddPhotosActivity extends AppCompatActivity {
                         } else if (data.getData() != null) uris.add(data.getData());
                     }
 
-                    List<String> encodings = new ArrayList<>();
+                    TextView err = findViewById(R.id.err_text);
 
-                    try {
-                        for (int i = 0; i < uris.size(); i++) {
-                            InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(uris.get(i));
-                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                            BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                            encodings.add(Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT));
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    if (uris.size() <= 4) {
+                        err.setVisibility(View.GONE);
+                        List<String> encodings = new ArrayList<>();
 
-                    for (int i = 0; i < encodings.size(); i++) {
-                        if (i < 4) {
-                            StringRequest stringRequest = getStringRequest(encodings.get(i));
-                            RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+                        try {
+                            for (int i = 0; i < uris.size(); i++) {
+                                InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(uris.get(i));
+                                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                BitmapFactory.decodeStream(inputStream).compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                                encodings.add(Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT));
+                            }
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
                         }
-                    }
-                    canClick = false;
+
+                        for (int i = 0; i < encodings.size(); i++) {
+                            if (i < 4 - currentPhoto) {
+                                StringRequest stringRequest = getStringRequest(encodings.get(i));
+                                RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+                            }
+                        }
+                        canClick = false;
+                    } else err.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -126,15 +139,15 @@ public class AddPhotosActivity extends AppCompatActivity {
     private StringRequest getStringRequest(String encode) {
         return new StringRequest(Request.Method.POST, Constants.URL_UPLOAD_IMAGE,
                 response -> {
-                    holders.get(currentPhoto).photo.setPadding(0 ,0, 0, 0);
                     RequestOptions requestOptions = new RequestOptions();
                     requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
                     Glide.with(getApplicationContext()).load(Base64.decode(encode.getBytes(), Base64.DEFAULT))
                             .apply(requestOptions).into(holders.get(currentPhoto).photo);
                     photoUrls.add(Constants.ROOT_URL + response);
                     canClick = true;
+                    loadedPhotos.set(currentPhoto, true);
                     currentPhoto++;
-                },
+                    },
                 System.out::println){
             @Override
             protected Map<String, String> getParams() {
@@ -152,7 +165,7 @@ public class AddPhotosActivity extends AppCompatActivity {
             StaticHelper.me.setMediaLinks(String.join("&", photoUrls));
             contInactive.setVisibility(View.GONE);
             cont.setVisibility(View.VISIBLE);
-            handler.removeCallbacks(runnable);
+            handler.removeCallbacks(runnable);//TODO
             canClick = false;
         } else handler.postDelayed(runnable, 100);
     }
@@ -188,10 +201,38 @@ public class AddPhotosActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull PhotosAdapter.ViewHolder holder, int position) {
             if (canClick) {
                 holder.photo.setOnClickListener(v -> {
-                    Intent intent = new Intent(ACTION_GET_CONTENT);
-                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                    intent.setType("*/*");
-                    getContent.launch(intent);
+                    if (!loadedPhotos.get(position)) {
+                        Intent intent = new Intent(ACTION_GET_CONTENT);
+                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                        intent.setType("*/*");
+                        getContent.launch(intent);
+                    } else {
+                        Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
+
+                        dialogWindow.setContentView(R.layout.alert_remove_photo);
+                        dialogWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        TextView remove = dialogWindow.findViewById(R.id.remove);
+                        remove.setOnClickListener(vi -> {
+                            for (int i = position; i < photoUrls.size(); i++) {
+                                if (i < photoUrls.size() - 1) {
+                                    RequestOptions requestOptions = new RequestOptions();
+                                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
+                                    Glide.with(getApplicationContext()).load(photoUrls.get(i+1))
+                                            .apply(requestOptions).into(holders.get(i).photo);
+                                } else {
+                                    holders.get(i).photo.setImageResource(R.drawable.add);
+                                    loadedPhotos.set(i, false);
+                                    currentPhoto = i;
+                                    photoUrls.remove(i);
+                                    break;
+                                }
+                            }
+                            dialogWindow.dismiss();
+                        });
+
+                        dialogWindow.show();
+                    }
                 });
             }
         }
