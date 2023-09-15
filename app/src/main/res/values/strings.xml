@@ -43,4 +43,5 @@
     <string name="invisible_mode">Невидимый\nрежим</string>
     <string name="err_more4photo">Вы выбрали больше 4 фото. Попробуйте снова.</string>
     <string name="delete_photo">Удалить фото</string>
+    <string name="dmy">ДДММГГГГ</string>
 </resources>

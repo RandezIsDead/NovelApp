@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="42dp"
             android:layout_marginRight="42dp"
-            android:layout_above="@id/btn_fix_internet"
+            android:layout_above="@id/btn_cont"
             android:layout_marginBottom="42dp"
             android:text="@string/check_conn"
             android:textSize="12sp"
@@ -104,7 +104,7 @@
             android:fontFamily="@font/lato"/>
 
         <RelativeLayout
-            android:id="@+id/btn_fix_internet"
+            android:id="@+id/btn_cont"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="16dp"

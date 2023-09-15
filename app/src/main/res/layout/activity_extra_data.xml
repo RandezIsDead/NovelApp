@@ -36,14 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/h1"
-        android:layout_above="@id/btn_fix_internet"
+        android:layout_above="@id/btn_cont"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"/>
 
     <RelativeLayout
-        android:id="@+id/btn_fix_internet"
+        android:id="@+id/btn_cont"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="16dp"

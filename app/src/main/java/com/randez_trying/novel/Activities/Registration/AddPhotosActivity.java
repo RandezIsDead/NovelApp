@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,14 +51,15 @@ import java.util.Map;
 
 public class AddPhotosActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private PhotosAdapter adapter;
     private final Handler handler = new Handler();
-    private final List<PhotosAdapter.ViewHolder> holders = new ArrayList<>();
-
-
+    private final Handler checkH = new Handler();
     private final List<String> photoUrls = new ArrayList<>();
     private final List<Boolean> loadedPhotos = new ArrayList<>();
+    private final List<String> uploadedPhotos = new ArrayList<>();
     private int currentPhoto = 0;
-    private boolean canClick = true;
+    private boolean notify = false;
     private RelativeLayout cont, contInactive;
 
     @Override
@@ -69,13 +71,17 @@ public class AddPhotosActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.h3);
         setTextGradient(text);
 
-        cont = findViewById(R.id.btn_fix_internet);
+        cont = findViewById(R.id.btn_cont);
         contInactive = findViewById(R.id.btn_cont_inactive);
 
-        RecyclerView recyclerView = findViewById(R.id.rec_photos);
+        recyclerView = findViewById(R.id.rec_photos);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new PhotosAdapter(getApplicationContext()));
+        recyclerView.setItemViewCacheSize(4);
+
+        adapter = new PhotosAdapter(getApplicationContext());
+        adapter.setHasStableIds(true);
+        recyclerView.setAdapter(adapter);
 
         loadedPhotos.add(false);
         loadedPhotos.add(false);
@@ -83,14 +89,17 @@ public class AddPhotosActivity extends AppCompatActivity {
         loadedPhotos.add(false);
 
         checkPhotos();
+        checkHandlers();
 
         back.setOnClickListener(v -> {
-            finish();
+            startActivity(new Intent(AddPhotosActivity.this, LocationManualActivity.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
         });
         cont.setOnClickListener(v -> {
             startActivity(new Intent(AddPhotosActivity.this, GenderActivity.class));
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            finish();
         });
     }
 
@@ -109,7 +118,7 @@ public class AddPhotosActivity extends AppCompatActivity {
 
                     TextView err = findViewById(R.id.err_text);
 
-                    if (uris.size() <= 4) {
+                    if (uris.size() <= 4 - currentPhoto) {
                         err.setVisibility(View.GONE);
                         List<String> encodings = new ArrayList<>();
 
@@ -125,12 +134,13 @@ public class AddPhotosActivity extends AppCompatActivity {
                         }
 
                         for (int i = 0; i < encodings.size(); i++) {
-                            if (i < 4 - currentPhoto) {
-                                StringRequest stringRequest = getStringRequest(encodings.get(i));
-                                RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-                            }
+                            photoUrls.add(encodings.get(i));
+                            loadedPhotos.set(currentPhoto, true);
+                            currentPhoto++;
+                            adapter.notifyItemRangeChanged(0, photoUrls.size());
+                            StringRequest stringRequest = getStringRequest(encodings.get(i));
+                            RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
                         }
-                        canClick = false;
                     } else err.setVisibility(View.VISIBLE);
                 }
             });
@@ -138,16 +148,7 @@ public class AddPhotosActivity extends AppCompatActivity {
     @NonNull
     private StringRequest getStringRequest(String encode) {
         return new StringRequest(Request.Method.POST, Constants.URL_UPLOAD_IMAGE,
-                response -> {
-                    RequestOptions requestOptions = new RequestOptions();
-                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
-                    Glide.with(getApplicationContext()).load(Base64.decode(encode.getBytes(), Base64.DEFAULT))
-                            .apply(requestOptions).into(holders.get(currentPhoto).photo);
-                    photoUrls.add(Constants.ROOT_URL + response);
-                    canClick = true;
-                    loadedPhotos.set(currentPhoto, true);
-                    currentPhoto++;
-                    },
+                response -> uploadedPhotos.add(Constants.ROOT_URL + response),
                 System.out::println){
             @Override
             protected Map<String, String> getParams() {
@@ -165,9 +166,19 @@ public class AddPhotosActivity extends AppCompatActivity {
             StaticHelper.me.setMediaLinks(String.join("&", photoUrls));
             contInactive.setVisibility(View.GONE);
             cont.setVisibility(View.VISIBLE);
-            handler.removeCallbacks(runnable);//TODO
-            canClick = false;
+            handler.removeCallbacks(runnable);
         } else handler.postDelayed(runnable, 100);
+    }
+
+    private void checkHandlers() {
+        Runnable runnable = this::checkHandlers;
+        if (notify) {
+            adapter = new PhotosAdapter(getApplicationContext());
+            adapter.setHasStableIds(true);
+            recyclerView.setAdapter(adapter);
+            notify = false;
+        }
+        checkH.postDelayed(runnable, 100);
     }
 
     private void setTextGradient(TextView textView) {
@@ -192,54 +203,51 @@ public class AddPhotosActivity extends AppCompatActivity {
         @NonNull
         @Override
         public PhotosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            ViewHolder holder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false));
-            holders.add(holder);
-            return holder;
+            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_photo, parent, false));
         }
 
         @Override
         public void onBindViewHolder(@NonNull PhotosAdapter.ViewHolder holder, int position) {
-            if (canClick) {
-                holder.photo.setOnClickListener(v -> {
-                    if (!loadedPhotos.get(position)) {
-                        Intent intent = new Intent(ACTION_GET_CONTENT);
-                        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                        intent.setType("*/*");
-                        getContent.launch(intent);
-                    } else {
-                        Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
-
-                        dialogWindow.setContentView(R.layout.alert_remove_photo);
-                        dialogWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                        TextView remove = dialogWindow.findViewById(R.id.remove);
-                        remove.setOnClickListener(vi -> {
-                            for (int i = position; i < photoUrls.size(); i++) {
-                                if (i < photoUrls.size() - 1) {
-                                    RequestOptions requestOptions = new RequestOptions();
-                                    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
-                                    Glide.with(getApplicationContext()).load(photoUrls.get(i+1))
-                                            .apply(requestOptions).into(holders.get(i).photo);
-                                } else {
-                                    holders.get(i).photo.setImageResource(R.drawable.add);
-                                    loadedPhotos.set(i, false);
-                                    currentPhoto = i;
-                                    photoUrls.remove(i);
-                                    break;
-                                }
-                            }
-                            dialogWindow.dismiss();
-                        });
-
-                        dialogWindow.show();
-                    }
-                });
+            if (holder.getAdapterPosition() < photoUrls.size()) {
+                RequestOptions requestOptions = new RequestOptions();
+                requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(10));
+                Glide.with(getApplicationContext()).load(Base64.decode(photoUrls.get(holder.getAdapterPosition()).getBytes(), Base64.DEFAULT))
+                        .apply(requestOptions).into(holder.photo);
             }
+            holder.photo.setOnClickListener(v -> {
+                if (!loadedPhotos.get(position)) {
+                    Intent intent = new Intent(ACTION_GET_CONTENT);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.setType("*/*");
+                    getContent.launch(intent);
+                } else {
+                    Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
+
+                    dialogWindow.setContentView(R.layout.alert_remove_photo);
+                    dialogWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    TextView remove = dialogWindow.findViewById(R.id.remove);
+                    remove.setOnClickListener(vi -> {
+                        loadedPhotos.set(currentPhoto-1, false);
+                        currentPhoto--;
+                        photoUrls.remove(holder.getAdapterPosition());
+                        notify = true;
+                        dialogWindow.dismiss();
+                    });
+
+                    dialogWindow.show();
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
             return 4;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -251,5 +259,16 @@ public class AddPhotosActivity extends AppCompatActivity {
                 photo = itemView.findViewById(R.id.photo);
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(AddPhotosActivity.this, LocationManualActivity.class));
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -44,12 +45,17 @@ public class LocationManualActivity extends AppCompatActivity {
         editText = findViewById(R.id.input_varia);
         listView = findViewById(R.id.lv_hints);
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
         getCities();
 
+        if (!StaticHelper.me.getCity().isEmpty()) {
+            editText.setText(StaticHelper.me.getCity());
+        }
+
         back.setOnClickListener(v -> {
-            finish();
+            startActivity(new Intent(LocationManualActivity.this, EnterBirthDateActivity.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
         });
 
         editText.setText(getIntent().getStringExtra("city"));
@@ -59,6 +65,7 @@ public class LocationManualActivity extends AppCompatActivity {
                 StaticHelper.me.setCity(city);
                 startActivity(new Intent(LocationManualActivity.this, AddPhotosActivity.class));
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
             } else Snackbar.make(v, "Поле не может быть пустым", Snackbar.LENGTH_SHORT).show();
         });
     }
@@ -121,5 +128,16 @@ public class LocationManualActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(LocationManualActivity.this, EnterBirthDateActivity.class));
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

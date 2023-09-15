@@ -100,7 +100,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/btn_fix_internet"
+        android:id="@+id/btn_cont"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="16dp"

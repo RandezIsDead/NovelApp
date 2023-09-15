@@ -72,7 +72,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="42dp"
       android:layout_marginEnd="42dp"
-      android:layout_above="@id/btn_fix_internet"
+      android:layout_above="@id/btn_cont"
       android:layout_marginBottom="70dp"
       android:text="@string/ert"
       android:textSize="12sp"
@@ -83,7 +83,7 @@
       android:fontFamily="@font/lato"/>
 
   <RelativeLayout
-      android:id="@+id/btn_fix_internet"
+      android:id="@+id/btn_cont"
       android:layout_width="match_parent"
       android:layout_height="50dp"
       android:layout_marginLeft="16dp"

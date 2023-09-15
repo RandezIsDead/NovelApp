@@ -1,15 +1,12 @@
 package com.randez_trying.novel.Activities.Registration;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,7 +40,7 @@ import java.util.UUID;
 public class ExtraDataActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<String> interests = new ArrayList<>();
+    private final List<String> interests = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +49,14 @@ public class ExtraDataActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rec_extra);
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
 
         getInterests(interests);
 
         back.setOnClickListener(v -> {
-            finish();
+            startActivity(new Intent(ExtraDataActivity.this, AboutMeActivity.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
         });
         cont.setOnClickListener(v -> {
             StaticHelper.myCredentials.setPersonalId(UUID.randomUUID().toString());
@@ -71,6 +69,7 @@ public class ExtraDataActivity extends AppCompatActivity {
                                     startActivity(new Intent(ExtraDataActivity.this, MainActivity.class));
                                     finish();
                                     overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                                    finish();
                                 },
                                 System.out::println){
                             @Override
@@ -162,13 +161,22 @@ public class ExtraDataActivity extends AppCompatActivity {
 
         TextView textView = bottomSheetDialog.findViewById(R.id.text);
         RecyclerView recSelect = bottomSheetDialog.findViewById(R.id.rec_select);
-        RelativeLayout contDialog = bottomSheetDialog.findViewById(R.id.btn_fix_internet);
 
+        String[] spl = getStrings(text);
+        List<Boolean> optionsSelected = new ArrayList<>();
+        for (int i = 0; i < options.size(); i++) {
+            optionsSelected.add(false);
+            for (String s : spl) {
+                if (options.get(i).equals(s)) {
+                    optionsSelected.set(i, true);
+                }
+            }
+        }
         List<String> sel = new ArrayList<>();
-        SelectAdapter selectAdapter = new SelectAdapter(getApplicationContext(), options, sel, multiple);
 
-        bottomSheetDialog.setOnDismissListener(arg0 -> {
+        bottomSheetDialog.setOnDismissListener(arg -> {
             String qwe = String.join("&", sel);
+            System.out.println(qwe);
 
             switch (text) {
                 case "Мои интересы":
@@ -180,6 +188,7 @@ public class ExtraDataActivity extends AppCompatActivity {
                     break;
                 case "Я ищу":
                     StaticHelper.me.setOrientation(qwe);
+                    break;
                 case "Алкоголь":
                     StaticHelper.me.setAlcohol(qwe);
                     break;
@@ -195,40 +204,38 @@ public class ExtraDataActivity extends AppCompatActivity {
         if (recSelect != null) {
             recSelect.setHasFixedSize(true);
             recSelect.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            recSelect.setItemViewCacheSize(options.size());
+
+            SelectAdapter selectAdapter = new SelectAdapter(getApplicationContext(), options, optionsSelected, sel, multiple, text, bottomSheetDialog);
+            selectAdapter.setHasStableIds(true);
             recSelect.setAdapter(selectAdapter);
         }
-        if (contDialog != null) {
-            contDialog.setOnClickListener(v -> {
-                List<Boolean> optionsSelected = selectAdapter.optionsSelected;
-                List<String> finalOptions = new ArrayList<>();
-                for (int i = 0; i < optionsSelected.size(); i++) {
-                    if (optionsSelected.get(i)) finalOptions.add(options.get(i));
-                }
-                String qwe = String.join("&", finalOptions);
-
-                switch (text) {
-                    case "Мои интересы":
-                        StaticHelper.me.setInterests(qwe);
-                        break;
-                    case "Знак зодиака":
-                        StaticHelper.me.setZodiacSign(qwe);
-                        break;
-                    case "Я ищу":
-                        StaticHelper.me.setOrientation(qwe);
-                    case "Алкоголь":
-                        StaticHelper.me.setAlcohol(qwe);
-                        break;
-                    case "Как часто ты куришь?":
-                        StaticHelper.me.setSmoke(qwe);
-                        break;
-                    default:
-                        break;
-                }
-
-                bottomSheetDialog.dismiss();
-            });
-        }
         return bottomSheetDialog;
+    }
+
+    private static String[] getStrings(String text) {
+        String ooo;
+        switch (text) {
+            case "Мои интересы":
+                ooo = StaticHelper.me.getInterests();
+                break;
+            case "Знак зодиака":
+                ooo = StaticHelper.me.getZodiacSign();
+                break;
+            case "Я ищу":
+                ooo = StaticHelper.me.getOrientation();
+                break;
+            case "Алкоголь":
+                ooo = StaticHelper.me.getAlcohol();
+                break;
+            case "Как часто ты куришь?":
+                ooo = StaticHelper.me.getSmoke();
+                break;
+            default:
+                ooo = "";
+                break;
+        }
+        return ooo.split("&");
     }
 
     private static class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder> {
@@ -238,110 +245,162 @@ public class ExtraDataActivity extends AppCompatActivity {
         private final boolean multiple;
         private final List<ViewHolder> holders;
         public List<Boolean> optionsSelected;
-        private List<String> sel;
+        private final List<String> sel;
+        private final String text;
+        private final BottomSheetDialog bottomSheetDialog;
 
-        private SelectAdapter(Context context, List<String> options, List<String> sel, boolean multiple) {
+        private SelectAdapter(Context context, List<String> options, List<Boolean> optionsSelected, List<String> sel, boolean multiple,
+                              String text, BottomSheetDialog bottomSheetDialog) {
             this.context = context;
             this.options = options;
             this.sel = sel;
             this.multiple = multiple;
-
-            this.optionsSelected = new ArrayList<>();
-            for (int i = 0; i < options.size(); i++) optionsSelected.add(false);
+            this.text = text;
+            this.bottomSheetDialog = bottomSheetDialog;
+            this.optionsSelected = optionsSelected;
             this.holders = new ArrayList<>();
         }
 
         @NonNull
         @Override
         public SelectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            ViewHolder viewHolder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_select, parent, false));
+            ViewHolder viewHolder;
+            if (viewType == 0) viewHolder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_select, parent, false));
+            else viewHolder = new ViewHolder(LayoutInflater.from(context).inflate(R.layout.btn_cont, parent, false));
             holders.add(viewHolder);
             return viewHolder;
         }
 
         @Override
+        public int getItemViewType(int position) {
+            if (options.get(position).isEmpty()) return 1;
+            else return 0;
+        }
+
+        @Override
         public void onBindViewHolder(@NonNull SelectAdapter.ViewHolder holder, int position) {
-            holder.textOption.setText(options.get(position));
-            if (!options.isEmpty()) {
-                if (options.get(0).equals("Овен")) {
-                    holder.image.setVisibility(View.VISIBLE);
-                    switch (position) {
-                        case 0:
-                            holder.image.setImageResource(R.drawable.oven);
-                            break;
-                        case 1:
-                            holder.image.setImageResource(R.drawable.telez);
-                            break;
-                        case 2:
-                            holder.image.setImageResource(R.drawable.twins);
-                            break;
-                        case 3:
-                            holder.image.setImageResource(R.drawable.cancer);
-                            break;
-                        case 4:
-                            holder.image.setImageResource(R.drawable.lion);
-                            break;
-                        case 5:
-                            holder.image.setImageResource(R.drawable.strel);
-                            break;
-                        case 6:
-                            holder.image.setImageResource(R.drawable.weight);
-                            break;
-                        case 7:
-                            holder.image.setImageResource(R.drawable.girl);
-                            break;
-                        case 8:
-                            holder.image.setImageResource(R.drawable.scorpion);
-                            break;
-                        case 9:
-                            holder.image.setImageResource(R.drawable.waterley);
-                            break;
-                        case 10:
-                            holder.image.setImageResource(R.drawable.fish);
-                            break;
-                        case 11:
-                            holder.image.setImageResource(R.drawable.koz);
-                            break;
-                        default:
-                            holder.image.setVisibility(View.GONE);
-                            break;
-                    }
-                }
-            }
-            if (optionsSelected.get(position)) holder.select.setImageResource(R.drawable.selected);
-
-            holder.itemView.setOnClickListener(v -> {
-                if (multiple) {
-                    if (!optionsSelected.get(position)) {
-                        holder.select.setImageResource(R.drawable.selected);
-                        optionsSelected.set(position, true);
-                        sel.add(options.get(position));
-                    } else {
-                        holder.select.setImageResource(R.drawable.not_selected);
-                        optionsSelected.set(position, false);
-
-                        String q = options.get(position);
-                        for (int a = 0; a < sel.size(); a++) {
-                            if (sel.get(a).equals(q)) {
-                                sel.remove(a);
+            if (!options.get(position).isEmpty()) {
+                holder.textOption.setText(options.get(position));
+                if (!options.isEmpty()) {
+                    if (options.get(0).equals("Овен")) {
+                        holder.image.setVisibility(View.VISIBLE);
+                        switch (position) {
+                            case 0:
+                                holder.image.setImageResource(R.drawable.oven);
                                 break;
-                            }
+                            case 1:
+                                holder.image.setImageResource(R.drawable.telez);
+                                break;
+                            case 2:
+                                holder.image.setImageResource(R.drawable.twins);
+                                break;
+                            case 3:
+                                holder.image.setImageResource(R.drawable.cancer);
+                                break;
+                            case 4:
+                                holder.image.setImageResource(R.drawable.lion);
+                                break;
+                            case 5:
+                                holder.image.setImageResource(R.drawable.strel);
+                                break;
+                            case 6:
+                                holder.image.setImageResource(R.drawable.weight);
+                                break;
+                            case 7:
+                                holder.image.setImageResource(R.drawable.girl);
+                                break;
+                            case 8:
+                                holder.image.setImageResource(R.drawable.scorpion);
+                                break;
+                            case 9:
+                                holder.image.setImageResource(R.drawable.waterley);
+                                break;
+                            case 10:
+                                holder.image.setImageResource(R.drawable.fish);
+                                break;
+                            case 11:
+                                holder.image.setImageResource(R.drawable.koz);
+                                break;
+                            default:
+                                holder.image.setVisibility(View.GONE);
+                                break;
                         }
                     }
-                } else {
-                    for (int i = 0; i < options.size(); i++) {
-                        optionsSelected.set(i, false);
-                        holders.get(i).select.setImageResource(R.drawable.not_selected);
-                    }
-                    optionsSelected.set(position, true);
-                    holder.select.setImageResource(R.drawable.selected);
                 }
-            });
+                if (optionsSelected.get(position)) {
+                    holder.select.setImageResource(R.drawable.selected);
+                    sel.add(options.get(position));
+                }
+
+                holder.itemView.setOnClickListener(v -> {
+                    if (multiple) {
+                        if (!optionsSelected.get(position)) {
+                            holder.select.setImageResource(R.drawable.selected);
+                            optionsSelected.set(position, true);
+                            sel.add(options.get(position));
+                        } else {
+                            holder.select.setImageResource(R.drawable.not_selected);
+                            optionsSelected.set(position, false);
+
+                            String q = options.get(position);
+                            for (int a = 0; a < sel.size(); a++) {
+                                if (sel.get(a).equals(q)) {
+                                    sel.remove(a);
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < options.size() - 1; i++) {
+                            optionsSelected.set(i, false);
+                            holders.get(i).select.setImageResource(R.drawable.not_selected);
+                        }
+                        sel.clear();
+                        sel.add(options.get(position));
+                        optionsSelected.set(position, true);
+                        holder.select.setImageResource(R.drawable.selected);
+                    }
+                });
+            } else {
+                holder.itemView.setOnClickListener(v -> {
+                    List<String> finalOptions = new ArrayList<>();
+                    for (int i = 0; i < optionsSelected.size(); i++) {
+                        if (optionsSelected.get(i)) finalOptions.add(options.get(i));
+                    }
+                    String qwe = String.join("&", finalOptions);
+
+                    switch (text) {
+                        case "Мои интересы":
+                            StaticHelper.me.setInterests(qwe);
+                            break;
+                        case "Знак зодиака":
+                            StaticHelper.me.setZodiacSign(qwe);
+                            break;
+                        case "Я ищу":
+                            StaticHelper.me.setOrientation(qwe);
+                        case "Алкоголь":
+                            StaticHelper.me.setAlcohol(qwe);
+                            break;
+                        case "Как часто ты куришь?":
+                            StaticHelper.me.setSmoke(qwe);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    bottomSheetDialog.dismiss();
+                });
+            }
         }
 
         @Override
         public int getItemCount() {
             return options.size();
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -453,6 +512,7 @@ public class ExtraDataActivity extends AppCompatActivity {
             }
             holder.image.setImageResource(drawable);
             holder.text.setText(text);
+            options.add("");
             String finalText = text;
             boolean finalMultiple = multiple;
             List<String> finalOptions = options;
@@ -479,5 +539,16 @@ public class ExtraDataActivity extends AppCompatActivity {
                 text = itemView.findViewById(R.id.text);
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(ExtraDataActivity.this, AboutMeActivity.class));
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

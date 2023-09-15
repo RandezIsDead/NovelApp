@@ -25,19 +25,21 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
 
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
         TextView manual = findViewById(R.id.rookami);
 
         getCity();
 
         back.setOnClickListener(v -> {
-            finish();
+            startActivity(new Intent(LocationActivity.this, EnterBirthDateActivity.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
         });
         cont.setOnClickListener(v -> getCity());
         manual.setOnClickListener(v -> {
-            startActivity(new Intent(this, LocationManualActivity.class));
+            startActivity(new Intent(LocationActivity.this, LocationManualActivity.class));
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            finish();
         });
     }
 

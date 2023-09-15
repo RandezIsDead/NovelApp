@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText emailEnter = findViewById(R.id.input_varia);
         TextView problem = findViewById(R.id.btn_problem);
-        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
         RelativeLayout google = findViewById(R.id.btn_google);
 
         setTextGradient(findViewById(R.id.app_name));

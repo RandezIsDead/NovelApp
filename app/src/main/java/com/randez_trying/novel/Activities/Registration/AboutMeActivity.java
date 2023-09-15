@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,17 +24,23 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_me);
 
         ImageView back = findViewById(R.id.back);
-        RelativeLayout cont = findViewById(R.id.btn_fix_internet);
+        RelativeLayout cont = findViewById(R.id.btn_cont);
         EditText text = findViewById(R.id.input_varia);
 
+        if (!StaticHelper.me.getAbout().isEmpty()) {
+            text.setText(StaticHelper.me.getAbout());
+        }
+
         back.setOnClickListener(v -> {
-            finish();
+            startActivity(new Intent(AboutMeActivity.this, GenderActivity.class));
             overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
         });
         cont.setOnClickListener(v -> {
             StaticHelper.me.setAbout(text.getText().toString().trim());
             startActivity(new Intent(AboutMeActivity.this, ExtraDataActivity.class));
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            finish();
         });
     }
 
@@ -48,5 +55,16 @@ public class AboutMeActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(AboutMeActivity.this, GenderActivity.class));
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

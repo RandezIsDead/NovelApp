@@ -1,7 +1,6 @@
 package com.randez_trying.novel.Activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -22,7 +21,6 @@ import com.randez_trying.novel.Activities.MainFragments.DashboardFragment;
 import com.randez_trying.novel.Activities.MainFragments.MessagesFragment;
 import com.randez_trying.novel.Activities.MainFragments.SearchFragment;
 import com.randez_trying.novel.Database.Prefs;
-import com.randez_trying.novel.Database.StaticHelper;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
 
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView appName = findViewById(R.id.app_name);
         RelativeLayout relFix = findViewById(R.id.rel_fix);
-        RelativeLayout fixInternet = findViewById(R.id.btn_fix_internet);
+        RelativeLayout fixInternet = findViewById(R.id.btn_cont);
         FrameLayout container = findViewById(R.id.container);
 
         relFix.setVisibility(View.GONE);
