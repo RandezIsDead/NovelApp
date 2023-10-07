@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel_sub_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp">
+
+    <RelativeLayout
+        android:id="@+id/rel_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="33dp"
+        android:paddingEnd="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/gradient_border"
+        tools:ignore="UselessParent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:text="@string/base_sub"
+            android:textSize="18sp"
+            android:fontFamily="@font/lato"
+            android:gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_below="@id/header"
+            android:layout_centerHorizontal="true"
+            android:lineSpacingExtra="8dp"
+            android:fontFamily="@font/lato"
+            android:textSize="14sp"
+            android:textColor="@color/cool"
+            android:gravity="center_vertical"/>
+
+        <RelativeLayout
+            android:id="@+id/btn_cont"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_grad"
+            android:layout_marginBottom="18dp"
+            android:layout_below="@id/content"
+            android:layout_marginTop="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cont_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_100"
+                android:textSize="16sp"
+                android:textColor="@color/light_grey"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

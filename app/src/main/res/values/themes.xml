@@ -1,7 +1,17 @@
 <resources>
     <style name="Base.Theme.Novel" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/light_grey</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
 
     <style name="Theme.Novel" parent="Base.Theme.Novel" />
+
+    <style name="RS" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/light_grey</item>
+        <item name="thumbColor">@color/some_other_grey</item>
+        <item name="trackColorActive">@color/cool</item>
+        <item name="trackColorInactive">@color/grey_ec</item>
+        <item name="tickVisible">false</item>
+    </style>
 </resources>

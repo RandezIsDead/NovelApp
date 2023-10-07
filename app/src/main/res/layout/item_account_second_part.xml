@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/rec_subscribes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/rel_indicators"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rec_subscribes"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/in1"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@drawable/cool_circle"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/in2"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@drawable/cdf_circle"
+            android:layout_toEndOf="@id/in1"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/in3"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:src="@drawable/cdf_circle"
+            android:layout_toEndOf="@id/in2"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+</RelativeLayout>

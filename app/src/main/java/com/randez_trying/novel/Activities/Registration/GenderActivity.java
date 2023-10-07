@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 
 public class GenderActivity extends AppCompatActivity {
@@ -55,7 +55,7 @@ public class GenderActivity extends AppCompatActivity {
             isManSelected = !isManSelected;
         });
         cont.setOnClickListener(v -> {
-            StaticHelper.me.setGender(isManSelected ? "male" : "female");
+            StaticHelper.me.setGender(isManSelected ? "Мужчина" : "Женщина");
             startActivity(new Intent(GenderActivity.this, AboutMeActivity.class));
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
             finish();

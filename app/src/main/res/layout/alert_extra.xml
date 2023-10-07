@@ -8,7 +8,7 @@
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/some_other_grey">
+        android:background="@drawable/grey_top_rounded">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
             android:contentDescription="@string/todo"/>
     </RelativeLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,27 +39,4 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"/>
-
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/btn_cont"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginLeft="16dp"-->
-<!--        android:layout_marginRight="16dp"-->
-<!--        android:layout_below="@id/rec_select"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:background="@drawable/btn_grad">-->
-
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/cont"-->
-<!--            android:textSize="16sp"-->
-<!--            android:textColor="@color/light_grey"-->
-<!--            android:fontFamily="@font/lato"-->
-<!--            android:gravity="center"-->
-<!--            android:layout_centerInParent="true"/>-->
-
-<!--    </RelativeLayout>-->
 </RelativeLayout>

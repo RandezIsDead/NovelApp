@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 
 public class AboutMeActivity extends AppCompatActivity {

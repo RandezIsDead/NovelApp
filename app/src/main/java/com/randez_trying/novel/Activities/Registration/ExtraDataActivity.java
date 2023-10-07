@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import com.randez_trying.novel.Activities.MainActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.R;
 
@@ -90,8 +91,8 @@ public class ExtraDataActivity extends AppCompatActivity {
                                     params.put("name", Encrypt.encode(StaticHelper.me.getName(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("gender", Encrypt.encode(StaticHelper.me.getGender(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("about", Encrypt.encode(StaticHelper.me.getAbout(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("orientation", Encrypt.encode(StaticHelper.me.getOrientation(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("familyPlans", Encrypt.encode(StaticHelper.me.getFamilyPlans(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("relationshipGoals", Encrypt.encode(StaticHelper.me.getRelationshipGoals(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("sports", Encrypt.encode(StaticHelper.me.getSports(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("alcohol", Encrypt.encode(StaticHelper.me.getAlcohol(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("smoke", Encrypt.encode(StaticHelper.me.getSmoke(), StaticHelper.myCredentials.getPersonalId()));
@@ -100,6 +101,12 @@ public class ExtraDataActivity extends AppCompatActivity {
                                     params.put("status", Encrypt.encode(StaticHelper.me.getStatus(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("subscriptionType", Encrypt.encode(StaticHelper.me.getSubscriptionType(), StaticHelper.myCredentials.getPersonalId()));
                                     params.put("zodiacSign", Encrypt.encode(StaticHelper.me.getZodiacSign(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("playlist", Encrypt.encode(StaticHelper.me.getPlaylist(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("location", Encrypt.encode(StaticHelper.me.getLocation(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("talkStyle", Encrypt.encode(StaticHelper.me.getTalkStyle(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("loveLang", Encrypt.encode(StaticHelper.me.getLoveLang(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("pets", Encrypt.encode(StaticHelper.me.getPets(), StaticHelper.myCredentials.getPersonalId()));
+                                    params.put("food", Encrypt.encode(StaticHelper.me.getFood(), StaticHelper.myCredentials.getPersonalId()));
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
@@ -176,18 +183,15 @@ public class ExtraDataActivity extends AppCompatActivity {
 
         bottomSheetDialog.setOnDismissListener(arg -> {
             String qwe = String.join("&", sel);
-            System.out.println(qwe);
-
             switch (text) {
                 case "Мои интересы":
                     StaticHelper.me.setInterests(qwe);
-                    System.out.println(qwe);
                     break;
                 case "Знак зодиака":
                     StaticHelper.me.setZodiacSign(qwe);
                     break;
                 case "Я ищу":
-                    StaticHelper.me.setOrientation(qwe);
+                    StaticHelper.me.setRelationshipGoals(qwe);
                     break;
                 case "Алкоголь":
                     StaticHelper.me.setAlcohol(qwe);
@@ -223,7 +227,7 @@ public class ExtraDataActivity extends AppCompatActivity {
                 ooo = StaticHelper.me.getZodiacSign();
                 break;
             case "Я ищу":
-                ooo = StaticHelper.me.getOrientation();
+                ooo = StaticHelper.me.getRelationshipGoals();
                 break;
             case "Алкоголь":
                 ooo = StaticHelper.me.getAlcohol();
@@ -238,7 +242,7 @@ public class ExtraDataActivity extends AppCompatActivity {
         return ooo.split("&");
     }
 
-    private static class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder> {
+    private class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder> {
 
         private final Context context;
         private final List<String> options;
@@ -335,9 +339,13 @@ public class ExtraDataActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(v -> {
                     if (multiple) {
                         if (!optionsSelected.get(position)) {
-                            holder.select.setImageResource(R.drawable.selected);
-                            optionsSelected.set(position, true);
-                            sel.add(options.get(position));
+                            if (sel.size() < 5) {
+                                holder.select.setImageResource(R.drawable.selected);
+                                optionsSelected.set(position, true);
+                                sel.add(options.get(position));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Нельзя выбрать больше 5 позиций", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             holder.select.setImageResource(R.drawable.not_selected);
                             optionsSelected.set(position, false);
@@ -377,7 +385,7 @@ public class ExtraDataActivity extends AppCompatActivity {
                             StaticHelper.me.setZodiacSign(qwe);
                             break;
                         case "Я ищу":
-                            StaticHelper.me.setOrientation(qwe);
+                            StaticHelper.me.setRelationshipGoals(qwe);
                         case "Алкоголь":
                             StaticHelper.me.setAlcohol(qwe);
                             break;
@@ -403,7 +411,7 @@ public class ExtraDataActivity extends AppCompatActivity {
             return position;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public ImageView image;
             public TextView textOption;
             public ImageView select;
@@ -516,12 +524,10 @@ public class ExtraDataActivity extends AppCompatActivity {
             String finalText = text;
             boolean finalMultiple = multiple;
             List<String> finalOptions = options;
-            holder.itemView.setOnClickListener(v -> openDialog(finalText, finalOptions, finalMultiple));
-        }
-
-        public void openDialog(String text, List<String> options, boolean multiple) {
-            final BottomSheetDialog bottomSheetDialog = getBottomSheetDialog(text, options, multiple);
-            bottomSheetDialog.show();
+            holder.itemView.setOnClickListener(v -> {
+                final BottomSheetDialog bottomSheetDialog = getBottomSheetDialog(finalText, finalOptions, finalMultiple);
+                bottomSheetDialog.show();
+            });
         }
 
         @Override
@@ -536,7 +542,7 @@ public class ExtraDataActivity extends AppCompatActivity {
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 image = itemView.findViewById(R.id.image);
-                text = itemView.findViewById(R.id.text);
+                text = itemView.findViewById(R.id.text_title);
             }
         }
     }

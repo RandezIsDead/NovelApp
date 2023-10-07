@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grey_top_rounded">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/home_indicator"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/todo"/>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:text="@string/save_card_text"
+        android:textColor="@color/grey"
+        android:gravity="center"
+        android:fontFamily="@font/lato"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/h4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/one_click_save_card"
+        android:textSize="14sp"
+        android:textColor="@color/grey"
+        android:gravity="center"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/btn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/h4"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_grad">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="@string/cont"
+            android:textSize="16sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rs_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/rs_extra_text"
+        android:textSize="16sp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rs_extra_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginEnd="16dp"/>
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/rs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rs_title"
+        android:valueFrom="0.0"
+        android:valueTo="10000.0"
+        android:stepSize="1.0"
+        android:theme="@style/Base.Theme.Novel"
+        style="@style/RS"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/rs_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rs_title"
+        android:valueFrom="18.0"
+        android:valueTo="80.0"
+        android:stepSize="1.0"
+        android:theme="@style/Base.Theme.Novel"
+        style="@style/RS"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

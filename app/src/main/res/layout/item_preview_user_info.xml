@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/main_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:id="@+id/sch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/sp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/search"
+                android:padding="4dp"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/i_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/sp"
+                android:layout_marginStart="4dp"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/cool"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sch"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/jp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/job_ico"
+                android:paddingTop="4dp"
+                android:contentDescription="@string/todo"
+                app:tint="@color/other_grey" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/jp"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/j"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/gp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/grey_pip"
+                app:tint="@color/other_grey"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/gp"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/main_info"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_abm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep1"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="@string/abm"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_abm"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/cool"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/text_content"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep2"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:text="@string/mainly"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <com.randez_trying.novel.Views.TagView.TagContainerLayout
+        android:id="@+id/main_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_m"
+        app:tag_theme="none"
+        app:container_enable_drag="false"
+        app:horizontal_interval="5dp"
+        app:vertical_interval="5dp"
+        app:tag_clickable="false"
+        app:tag_text_size="12sp"
+        app:tag_text_color="@color/cool"
+        app:tag_border_color="@color/cool"
+        app:tag_background_color="@color/light_grey"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/main_tags"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep3"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:text="@string/my_langs"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <com.randez_trying.novel.Views.TagView.TagContainerLayout
+        android:id="@+id/lang_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_l"
+        app:container_enable_drag="false"
+        app:tag_theme="none"
+        app:horizontal_interval="5dp"
+        app:vertical_interval="5dp"
+        app:tag_clickable="false"
+        app:tag_text_size="12sp"
+        app:tag_text_color="@color/cool"
+        app:tag_border_color="@color/cool"
+        app:tag_background_color="@color/light_grey"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep4"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/lang_tags"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep4"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:text="@string/my_inerests"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <com.randez_trying.novel.Views.TagView.TagContainerLayout
+        android:id="@+id/interests_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_i"
+        app:container_enable_drag="false"
+        app:tag_theme="none"
+        app:horizontal_interval="5dp"
+        app:vertical_interval="5dp"
+        app:tag_clickable="false"
+        app:tag_text_size="12sp"
+        app:tag_text_color="@color/cool"
+        app:tag_border_color="@color/cool"
+        app:tag_background_color="@color/light_grey"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep5"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/interests_tags"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep5"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:text="@string/sport"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <com.randez_trying.novel.Views.TagView.TagContainerLayout
+        android:id="@+id/sports_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_s"
+        app:container_enable_drag="false"
+        app:tag_theme="none"
+        app:horizontal_interval="5dp"
+        app:vertical_interval="5dp"
+        app:tag_clickable="false"
+        app:tag_text_size="12sp"
+        app:tag_text_color="@color/cool"
+        app:tag_border_color="@color/cool"
+        app:tag_background_color="@color/light_grey"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep6"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@id/sports_tags"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_title_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep6"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:text="@string/pets"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <com.randez_trying.novel.Views.TagView.TagContainerLayout
+        android:id="@+id/pets_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_title_p"
+        app:container_enable_drag="false"
+        app:tag_theme="none"
+        app:horizontal_interval="5dp"
+        app:vertical_interval="5dp"
+        app:tag_clickable="false"
+        app:tag_text_size="12sp"
+        app:tag_text_color="@color/cool"
+        app:tag_border_color="@color/cool"
+        app:tag_background_color="@color/light_grey"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"/>
+
+</RelativeLayout>

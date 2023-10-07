@@ -2,6 +2,7 @@ package com.randez_trying.novel.Activities.Registration;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.R;
 
 import java.io.IOException;
@@ -63,10 +67,13 @@ public class LocationActivity extends AppCompatActivity {
     public double[] getLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         String bestProvider = locationManager.getBestProvider(new Criteria(), false);
-        if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0 || ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
+        if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0
+                || ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
             Location lastKnownLocation = locationManager.getLastKnownLocation(bestProvider);
             try {
-                return new double[]{lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()};
+                if (lastKnownLocation != null) {
+                    return new double[]{lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()};
+                } else return null;
             } catch (NullPointerException e) {
                 e.printStackTrace();
                 return null;
@@ -74,6 +81,23 @@ public class LocationActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(this, new String[]{"android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"}, 476);
             return null;
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 476) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0
+                        || ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_COARSE_LOCATION") == 0) {
+                    getCity();
+                } else Prefs.write(getApplicationContext(), "getLocation", "false");
+            } else {
+                Prefs.write(getApplicationContext(), "getLocation", "false");
+                startActivity(new Intent(LocationActivity.this, LocationManualActivity.class));
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+            }
         }
     }
 }

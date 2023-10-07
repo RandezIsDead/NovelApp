@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rel_sep1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_sep1"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"
+        android:layout_marginStart="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_i1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tit"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_content1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/img_src1"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/other_grey"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/img_src1"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/forward"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_i2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_i1"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/img_src2"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/other_grey"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/img_src2"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/forward"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_i3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_i2"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_content3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/img_src3"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/other_grey"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/img_src3"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/forward"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_i4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_i3"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_content4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/img_src4"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/other_grey"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/img_src4"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/forward"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

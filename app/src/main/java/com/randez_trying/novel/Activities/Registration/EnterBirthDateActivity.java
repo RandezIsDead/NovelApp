@@ -7,23 +7,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 import com.randez_trying.novel.Views.BirthDateEditText;
 import com.randez_trying.novel.Views.BirthDateTextView;
@@ -89,12 +86,12 @@ public class EnterBirthDateActivity extends AppCompatActivity {
     }
 
     private void end(View v) {
-        String[] sp = Objects.requireNonNull(et.getText()).toString().split("");
-        String day = sp[0] + sp[1];
-        String month = sp[2] + sp[3];
-        String year = sp[4] + sp[5] + sp[6] + sp[7];
-        LocalDateTime now = LocalDateTime.now();
         try {
+            String[] sp = Objects.requireNonNull(et.getText()).toString().split("");
+            String day = sp[0] + sp[1];
+            String month = sp[2] + sp[3];
+            String year = sp[4] + sp[5] + sp[6] + sp[7];
+            LocalDateTime now = LocalDateTime.now();
             LocalDateTime parse = LocalDateTime.parse(year + "-" + month + "-" + day + " 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
             if (Integer.parseInt(day) > 31 || Integer.parseInt(month) > 12 || Integer.parseInt(year) > Year.now().getValue()) {
                 Snackbar.make(v, "Некорректно введена дата", 0).show();

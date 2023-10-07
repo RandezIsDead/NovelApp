@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_grad"
+    android:id="@+id/rel_sub"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp">
+
+    <ImageView
+        android:id="@+id/sub_img"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/base_sub"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/top_border"
+        android:layout_above="@id/bottom_border"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/todo"/>
+
+    <RelativeLayout
+        android:id="@+id/q"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sub_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/base_sub_text"
+            android:textSize="24sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/left_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/q"/>
+
+    <RelativeLayout
+        android:id="@+id/right_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/q"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/q"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/extra_abilities_text"
+        android:textSize="14sp"
+        android:textColor="@color/light_grey"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/top_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/q"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"/>
+
+    <RelativeLayout
+        android:id="@+id/bottom_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

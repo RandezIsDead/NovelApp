@@ -26,7 +26,7 @@ import com.randez_trying.novel.Activities.Registration.EnterNameActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
@@ -212,7 +212,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
                                     Encrypt.decode(jsonObject.getString("name").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("gender").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("about").getBytes(), personalId),
-                                    Encrypt.decode(jsonObject.getString("orientation").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("familyPlans").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("familyPlans").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("sports").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("alcohol").getBytes(), personalId),
@@ -222,7 +222,13 @@ public class VerifyEmailActivity extends AppCompatActivity {
                                     Encrypt.decode(jsonObject.getString("socialMediaLinks").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("status").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("subscriptionType").getBytes(), personalId),
-                                    Encrypt.decode(jsonObject.getString("zodiacSign").getBytes(), personalId)
+                                    Encrypt.decode(jsonObject.getString("zodiacSign").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("playlist").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("location").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("talkStyle").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("loveLang").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("pets").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("food").getBytes(), personalId)
                             );
                             Prefs.saveMe(getApplicationContext(), me);
                             startActivity(new Intent(this, MainActivity.class));

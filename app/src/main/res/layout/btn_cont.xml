@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/btn_grad"
-    android:id="@+id/btn_cont">
+    android:id="@+id/btn_cont"
+    android:layout_marginTop="8dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"

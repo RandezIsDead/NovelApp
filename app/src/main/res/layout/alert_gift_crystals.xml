@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_rounded_corners">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wegv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColor="#805D6A73"
+        android:textSize="12sp"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/plus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/plus_cool"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:id="@+id/rel_cr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/plus"
+            android:background="@drawable/btn_light_grey"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/exc_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_1"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:fontFamily="@font/lato"/>
+
+            <ImageView
+                android:id="@+id/crys"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/crystals"
+                android:layout_toEndOf="@id/exc_counter"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/todo"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/minus"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/minus_cool"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@id/rel_cr"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sep_hor"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/abf"
+        android:layout_marginTop="18dp"
+        android:layout_below="@id/rel_sel"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/white_blr_cut"
+        android:layout_below="@id/sep_hor">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textSize="16sp"
+            android:background="@drawable/white_bl_cut"
+            android:layout_marginEnd="0.5dp"
+            android:textColor="#E628272C"
+            android:gravity="center"
+            android:fontFamily="@font/lato"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cont"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/send"
+            android:textSize="16sp"
+            android:textColor="@color/cool"
+            android:gravity="center"
+            android:background="@drawable/white_br_cut"
+            android:fontFamily="@font/lato"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"/>
+
+    </LinearLayout>
+</RelativeLayout>

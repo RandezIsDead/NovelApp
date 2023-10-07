@@ -36,9 +36,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.RequestHandler;
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 
 import java.io.ByteArrayOutputStream;
@@ -48,6 +49,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AddPhotosActivity extends AppCompatActivity {
 
@@ -59,6 +61,8 @@ public class AddPhotosActivity extends AppCompatActivity {
     private final List<Boolean> loadedPhotos = new ArrayList<>();
     private final List<String> uploadedPhotos = new ArrayList<>();
     private int currentPhoto = 0;
+    private int uploadProgress = 0;
+    private boolean showSnack = true;
     private boolean notify = false;
     private RelativeLayout cont, contInactive;
 
@@ -97,9 +101,14 @@ public class AddPhotosActivity extends AppCompatActivity {
             finish();
         });
         cont.setOnClickListener(v -> {
-            startActivity(new Intent(AddPhotosActivity.this, GenderActivity.class));
-            overridePendingTransition(R.anim.right_in, R.anim.left_out);
-            finish();
+            if (uploadProgress == 4) {
+                StaticHelper.me.setMediaLinks(String.join("&", uploadedPhotos));
+                startActivity(new Intent(AddPhotosActivity.this, GenderActivity.class));
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
+                finish();
+            } else {
+                Snackbar.make(v, "Фото еще не загружены. Подождите пожалуйста.", Snackbar.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -148,13 +157,15 @@ public class AddPhotosActivity extends AppCompatActivity {
     @NonNull
     private StringRequest getStringRequest(String encode) {
         return new StringRequest(Request.Method.POST, Constants.URL_UPLOAD_IMAGE,
-                response -> uploadedPhotos.add(Constants.ROOT_URL + response),
+                response -> {
+                    uploadedPhotos.add(Constants.ROOT_URL + response);
+                    uploadProgress++;
+                },
                 System.out::println){
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("image", encode);
-
                 return params;
             }
         };
@@ -163,7 +174,6 @@ public class AddPhotosActivity extends AppCompatActivity {
     private void checkPhotos() {
         Runnable runnable = this::checkPhotos;
         if (photoUrls.size() == 4) {
-            StaticHelper.me.setMediaLinks(String.join("&", photoUrls));
             contInactive.setVisibility(View.GONE);
             cont.setVisibility(View.VISIBLE);
             handler.removeCallbacks(runnable);
@@ -177,6 +187,10 @@ public class AddPhotosActivity extends AppCompatActivity {
             adapter.setHasStableIds(true);
             recyclerView.setAdapter(adapter);
             notify = false;
+        }
+        if (uploadProgress == 4 && showSnack) {
+            showSnack = false;
+            Snackbar.make(getWindow().getDecorView().getRootView(), "Фото успешно загружены.", Snackbar.LENGTH_SHORT).show();
         }
         checkH.postDelayed(runnable, 100);
     }
@@ -224,12 +238,13 @@ public class AddPhotosActivity extends AppCompatActivity {
                     Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
 
                     dialogWindow.setContentView(R.layout.alert_remove_photo);
-                    dialogWindow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    Objects.requireNonNull(dialogWindow.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                     TextView remove = dialogWindow.findViewById(R.id.remove);
                     remove.setOnClickListener(vi -> {
                         loadedPhotos.set(currentPhoto-1, false);
                         currentPhoto--;
+                        uploadProgress--;
                         photoUrls.remove(holder.getAdapterPosition());
                         notify = true;
                         dialogWindow.dismiss();

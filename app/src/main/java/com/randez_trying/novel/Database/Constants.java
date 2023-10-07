@@ -2,41 +2,29 @@ package com.randez_trying.novel.Database;
 
 public class Constants {
     public static final String ROOT_URL = "https://scripsit-itaque.ru/novel/";
-    public static final String URL_ADD_COMMENT = "https://scripsit-itaque.ru/novel/posts/addComment.php";
-    public static final String URL_ADD_DIALOG = "https://scripsit-itaque.ru/novel/dialogs/addDialog.php";
-    public static final String URL_ADD_DIALOG_USER = "https://scripsit-itaque.ru/novel/dialogs/addDialogUser.php";
-    public static final String URL_ADD_FOLLOWER = "https://scripsit-itaque.ru/novel/users/addFollower.php";
-    public static final String URL_ADD_POST = "https://scripsit-itaque.ru/novel/posts/addPost.php";
-    public static final String URL_ADD_UP_DE_VOTE = "https://scripsit-itaque.ru/novel/posts/addUpDeVote.php";
-    public static final String URL_DELETE_FOLLOWER = "https://scripsit-itaque.ru/novel/users/deleteFollower.php";
-    public static final String URL_DELETE_USER = "https://scripsit-itaque.ru/novel/deleteUser.php";
-    public static final String URL_GET_COMMENTS = "https://scripsit-itaque.ru/novel/posts/getComments.php";
-    public static final String URL_GET_DATA = "https://scripsit-itaque.ru/novel/getData.php";
-    public static final String URL_GET_DIALOGS = "https://scripsit-itaque.ru/novel/dialogs/getDialogs.php";
-    public static final String URL_GET_DIALOG_USERS = "https://scripsit-itaque.ru/novel/dialogs/getDialogUsers.php";
-    public static final String URL_GET_FOLLOWERS_BY_USER_ID = "https://scripsit-itaque.ru/novel/users/getFollowersByUserId.php";
-    public static final String URL_GET_MESSAGES = "https://scripsit-itaque.ru/novel/messages/getMessages.php";
-    public static final String URL_GET_MUSIC_BY_NAME = "https://scripsit-itaque.ru/novel/getMusicByName.php";
-    public static final String URL_GET_POSTS = "https://scripsit-itaque.ru/novel/posts/getPosts.php";
-    public static final String URL_GET_POSTS_BY_USER_ID = "https://scripsit-itaque.ru/novel/posts/getPostsByUserId.php";
-    public static final String URL_GET_POST_IMAGES = "https://scripsit-itaque.ru/novel/posts/getPostImages.php";
-    public static final String URL_GET_UP_DE_VOTES = "https://scripsit-itaque.ru/novel/posts/getUpDeVotesByPostId.php";
-    public static final String URL_GET_USER_BY_ID = "https://scripsit-itaque.ru/novel/users/getUserById.php";
-    public static final String URL_GET_USER_BY_NAME = "https://scripsit-itaque.ru/novel/users/getUserByName.php";
+    public static final String URL_VERIFY = "https://scripsit-itaque.ru/novel/users/verify.php";
     public static final String URL_LOGIN = "https://scripsit-itaque.ru/novel/users/userLogin.php";
     public static final String URL_GET_CITIES = "https://scripsit-itaque.ru/novel/getCities.php";
+    public static final String URL_UPLOAD_IMAGE = "https://scripsit-itaque.ru/novel/uploadImage.php";
+
     public static final String URL_GET_INTERESTS = "https://scripsit-itaque.ru/novel/getInterests.php";
+    public static final String URL_GET_LANGUAGES = "https://scripsit-itaque.ru/novel/getLanguages.php";
+    public static final String URL_GET_SPORTS = "https://scripsit-itaque.ru/novel/getSports.php";
+    public static final String URL_GET_PETS = "https://scripsit-itaque.ru/novel/getPets.php";
+    public static final String URL_GET_FOOD = "https://scripsit-itaque.ru/novel/getFood.php";
+
     public static final String URL_REGISTER = "https://scripsit-itaque.ru/novel/users/registerUser.php";
     public static final String URL_REGISTER_2 = "https://scripsit-itaque.ru/novel/users/regUser2.php";
-    public static final String URL_REMOVE_DIALOG = "https://scripsit-itaque.ru/novel/dialogs/removeDialog.php";
-    public static final String URL_REMOVE_DIALOG_USER = "https://scripsit-itaque.ru/novel/dialogs/removeDialogUsers.php";
-    public static final String URL_SEND_DATA = "https://scripsit-itaque.ru/novel/sendData.php";
-    public static final String URL_SEND_MESSAGE = "https://scripsit-itaque.ru/novel/messages/sendMessage.php";
-    public static final String URL_UPDATE_DIALOG = "https://scripsit-itaque.ru/novel/dialogs/updateDialog.php";
+
+    public static final String URL_GET_CREDENTIALS = "https://scripsit-itaque.ru/novel/users/getCredentials.php";
+    public static final String URL_UPDATE_CREDENTIALS = "https://scripsit-itaque.ru/novel/users/updateCredentials.php";
+    public static final String URL_GET_USER = "https://scripsit-itaque.ru/novel/users/getUser.php";
+    public static final String URL_GET_USERS = "https://scripsit-itaque.ru/novel/users/getUsers.php";
     public static final String URL_UPDATE_USER = "https://scripsit-itaque.ru/novel/users/updateUser.php";
-    public static final String URL_UPDATE_USER_ONLINE = "https://scripsit-itaque.ru/novel/users/updateUserOnline.php";
-    public static final String URL_UPLOAD_IMAGE = "https://scripsit-itaque.ru/novel/uploadImage.php";
-    public static final String URL_UPLOAD_MUSIC = "https://scripsit-itaque.ru/novel/uploadMusic.php";
-    public static final String URL_UPLOAD_POST_IMAGE = "https://scripsit-itaque.ru/novel/posts/uploadImage.php";
-    public static final String URL_VERIFY = "https://scripsit-itaque.ru/novel/users/verify.php";
+
+    public static final String URL_GET_CARDS = "https://scripsit-itaque.ru/novel/users/getCards.php";
+    public static final String URL_ADD_CARD = "https://scripsit-itaque.ru/novel/users/addCard.php";
+
+    public static final String URL_GET_TRANSACTIONS = "https://scripsit-itaque.ru/novel/transactions/getTransactions.php";
+    public static final String URL_ADD_TRANSACTION = "https://scripsit-itaque.ru/novel/transactions/addTransaction.php";
 }

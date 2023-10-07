@@ -62,7 +62,6 @@
         android:fontFamily="@font/lato"
         android:textColorHint="@color/other_grey"/>
 
-
     <RelativeLayout
         android:id="@+id/btn_cont"
         android:layout_width="match_parent"

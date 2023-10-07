@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/top_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/grey_circle"
+            android:src="@drawable/back"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="1dp"
+            android:contentDescription="@string/todo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/window_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pay_text_ff"
+            android:textSize="14sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/cool"
+            android:gravity="center"
+            android:fontFamily="@font/lato"/>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_rel"
+        android:layout_marginTop="32dp"
+        android:text="@string/n"
+        android:textSize="27sp"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_card_number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/text"
+        android:layout_marginTop="18dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:background="@drawable/btn_light_grey"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:maxLength="16"
+        android:textColor="@color/grey"
+        android:hint="@string/card_num"
+        android:fontFamily="@font/lato"
+        android:textColorHint="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_card_date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/input_card_number"
+        android:layout_marginTop="12dp"
+        android:layout_toStartOf="@id/center"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:maxLength="5"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/btn_light_grey"
+        android:inputType="phone"
+        android:textColor="@color/grey"
+        android:hint="@string/mm_yy"
+        android:gravity="center"
+        android:fontFamily="@font/lato"
+        android:textColorHint="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_card_cvv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/input_card_number"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@id/center"
+        android:layout_marginStart="8dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:maxLength="3"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/btn_light_grey"
+        android:inputType="number"
+        android:gravity="center"
+        android:textColor="@color/grey"
+        android:hint="@string/cvv"
+        android:fontFamily="@font/lato"
+        android:textColorHint="@color/other_grey"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_sum"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/input_card_cvv"
+        android:layout_marginTop="12dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:background="@drawable/btn_light_grey"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textColor="@color/grey"
+        android:gravity="center_vertical"
+        android:hint="@string/sum"
+        android:fontFamily="@font/lato"
+        android:textColorHint="@color/other_grey"/>
+
+    <RelativeLayout
+        android:id="@+id/btn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/input_sum"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/btn_grad">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="@string/cont"
+            android:textSize="16sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_cont"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
+            android:background="@color/other_grey"
+            android:layout_toStartOf="@id/text_or"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pay_from"
+            android:layout_centerHorizontal="true"
+            android:textColor="#805D6A73"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            android:background="@color/other_grey"
+            android:layout_toEndOf="@id/text_or"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_or"
+        android:layout_marginTop="24dp"/>
+
+</RelativeLayout>

@@ -44,4 +44,84 @@
     <string name="err_more4photo">Вы выбрали больше 4 фото. Попробуйте снова.</string>
     <string name="delete_photo">Удалить фото</string>
     <string name="dmy">ДДММГГГГ</string>
+    <string name="dislike">Dislike</string>
+    <string name="like">Like</string>
+    <string name="base_sub">Базовая подписка</string>
+    <string name="_100">От 100 р</string>
+    <string name="subs">Подписки</string>
+    <string name="boosts">Бусты</string>
+    <string name="_30_boost">Переместите свой профиль на первое место в выбранной зоне поиска на 30 минут, чтобы найти больше пар</string>
+    <string name="_0boost">Бустов: 0</string>
+    <string name="get_boosts">Получить бусты</string>
+    <string name="more">Подробнее</string>
+    <string name="inv_mode">Невидимый режим</string>
+    <string name="_0boost_total">Всего бустов: 0</string>
+    <string name="buy_boost_text">Купить бусты</string>
+    <string name="boosts_sss">Бусты</string>
+    <string name="_1boost">1 буст</string>
+    <string name="_3boost">3 буста</string>
+    <string name="_5boost">5 бустов</string>
+    <string name="_10boost">10 бустов</string>
+    <string name="_100rub">100 ₽</string>
+    <string name="_300rub">300 ₽</string>
+    <string name="_500rub">500 ₽</string>
+    <string name="_1100rub">1000 ₽</string>
+    <string name="_900rub">900 ₽</string>
+    <string name="or">или</string>
+    <string name="pro___">PRO-</string>
+    <string name="ver">ВЕРСИЯ</string>
+    <string name="bp">Буст профиля</string>
+    <string name="cry_fuck">Кристаллы</string>
+    <string name="_0crystals">Всего кристаллов: 0</string>
+    <string name="_1cry">1 кристалл</string>
+    <string name="_3cry">3 кристалла</string>
+    <string name="_5cry">5 кристаллов</string>
+    <string name="_10cry">10 кристаллов</string>
+    <string name="buy_crystalls_text">Купить кристаллы</string>
+    <string name="exch">Разменять</string>
+    <string name="sos">Выбрать другое количество</string>
+    <string name="_1">1</string>
+    <string name="calc_sum">Расчет суммы</string>
+    <string name="exc_cryyyyy">Разменять кристаллы</string>
+    <string name="total_balance">Общий баланс</string>
+    <string name="_8_000">8,000 ₽</string>
+    <string name="n">Введите следующие\nданнные карты</string>
+    <string name="card_num">Номер карты</string>
+    <string name="mm_yy">Месяц / Год</string>
+    <string name="cvv">CVV</string>
+    <string name="sum">Сумма</string>
+    <string name="pay_from">Оплатить через</string>
+    <string name="pay_text_ff">Оплата</string>
+    <string name="save_card_text">Сохранить карту</string>
+    <string name="one_click_save_card">Сохраняй данные карты и оплачивай в один клик, экономь своё время</string>
+    <string name="pay_result">Результат оплаты</string>
+    <string name="pay_success">Оплата произошла\nуспешно</string>
+    <string name="_10number">10</string>
+    <string name="search_text_params">Параметры поиска</string>
+    <string name="wegv">Укажите количество подарков</string>
+    <string name="cancel">Отмена</string>
+    <string name="send">Отправить</string>
+    <string name="redact">Редактирование</string>
+    <string name="red">Редактировать</string>
+    <string name="preview_text">Предпросмотр</string>
+    <string name="media">Медиафайлы</string>
+    <string name="abm">Обо мне</string>
+    <string name="my_height">Мой рост</string>
+    <string name="_100just">120</string>
+    <string name="mainly">Основное</string>
+    <string name="my_inerests">Мои интересы</string>
+    <string name="my_langs">Языки, которыми я владею</string>
+    <string name="base_sub_text">Базовая подписка</string>
+    <string name="extra_abilities_text">Расширь свои возможности</string>
+    <string name="sport">Спорт</string>
+    <string name="pets">Питомцы</string>
+
+    <string-array name="range_slider">
+        <item>0.0</item>
+        <item>10000.0</item>
+    </string-array>
+    <string-array name="range_slider_age">
+        <item>18.0</item>
+        <item>25.0</item>
+    </string-array>
 </resources>

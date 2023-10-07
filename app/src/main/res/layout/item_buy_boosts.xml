@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/top_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/grey_circle"
+            android:src="@drawable/back"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="1dp"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/boosts_sss"
+                android:textSize="14sp"
+                android:textColor="@color/cool"
+                android:gravity="center"
+                android:fontFamily="@font/lato"/>
+            
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/help_icon"
+                android:contentDescription="@string/todo"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/text"
+                android:layout_marginStart="3dp"/>
+            
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_rel"
+        android:layout_marginTop="18dp">
+
+        <ImageView
+            android:id="@+id/ico_boost"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/boost"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/todo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/boost_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0boost_total"
+            android:textSize="14sp"
+            android:textColor="@color/violet_one"
+            android:gravity="center"
+            android:fontFamily="@font/lato"
+            android:layout_toEndOf="@id/ico_boost"
+            android:layout_marginStart="6dp"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/bst"
+        android:layout_marginTop="28dp"
+        android:text="@string/buy_boost_text"
+        android:textSize="14sp"
+        android:textColor="@color/cool"
+        android:gravity="center"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/buy1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_main"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_light_grey">
+
+        <ImageView
+            android:id="@+id/bi1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/boost"
+            android:contentDescription="@string/todo"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="18dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/bi1"
+            android:layout_marginStart="26dp"
+            android:layout_toStartOf="@id/cost1"
+            android:layout_marginEnd="26dp"
+            android:text="@string/_1boost"
+            android:textColor="@color/violet_one"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/ar1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@string/todo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cost1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/ar1"
+            android:layout_marginEnd="10dp"
+            android:text="@string/_100rub"
+            android:textColor="#805D6A73"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buy2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buy1"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_light_grey">
+
+        <ImageView
+            android:id="@+id/bi2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/boost"
+            android:contentDescription="@string/todo"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="18dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/bi2"
+            android:layout_marginStart="26dp"
+            android:layout_toStartOf="@id/cost2"
+            android:layout_marginEnd="26dp"
+            android:text="@string/_3boost"
+            android:textColor="@color/violet_one"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/ar2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@string/todo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cost2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/ar2"
+            android:layout_marginEnd="10dp"
+            android:text="@string/_300rub"
+            android:textColor="#805D6A73"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buy3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buy2"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_light_grey">
+
+        <ImageView
+            android:id="@+id/bi3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/boost"
+            android:contentDescription="@string/todo"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="18dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/bi3"
+            android:layout_marginStart="26dp"
+            android:layout_toStartOf="@id/cost3"
+            android:layout_marginEnd="26dp"
+            android:text="@string/_5boost"
+            android:textColor="@color/violet_one"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/ar3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@string/todo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cost3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/ar3"
+            android:layout_marginEnd="10dp"
+            android:text="@string/_500rub"
+            android:textColor="#805D6A73"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buy4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buy3"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_light_grey">
+
+        <ImageView
+            android:id="@+id/card_img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/boost"
+            android:contentDescription="@string/todo"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="18dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/card_img"
+            android:layout_marginStart="26dp"
+            android:layout_toStartOf="@id/cost_real"
+            android:layout_marginEnd="26dp"
+            android:text="@string/_10boost"
+            android:textColor="@color/violet_one"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/froward"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@string/todo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cost4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/froward"
+            android:layout_marginEnd="10dp"
+            android:text="@string/_1100rub"
+            android:background="@drawable/line_through_red"
+            android:textColor="#FF5B81"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cost_real"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/cost4"
+            android:layout_marginEnd="6dp"
+            android:text="@string/_900rub"
+            android:textColor="#65E937"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buy4"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
+            android:background="@color/other_grey"
+            android:layout_toStartOf="@id/text_or"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:layout_centerHorizontal="true"
+            android:textColor="#805D6A73"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_centerVertical="true"
+            android:background="@color/other_grey"
+            android:layout_toEndOf="@id/text_or"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_pro_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_or"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_sub_300">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/beautiful_shape"
+            android:layout_below="@id/top_border"
+            android:layout_above="@id/bottom_border"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:id="@+id/q"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pro_text_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pro___"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/light_grey"
+                android:fontFamily="@font/lato"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pro_text_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ver"
+                android:layout_toEndOf="@id/pro_text_left"
+                android:textSize="18sp"
+                android:textColor="@color/light_grey"
+                android:fontFamily="@font/lato"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/left_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/q"/>
+
+        <RelativeLayout
+            android:id="@+id/right_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/q"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/q"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            android:text="@string/bp"
+            android:textSize="14sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:id="@+id/btn_cont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/left_border"
+            android:layout_toStartOf="@id/right_border"
+            android:layout_below="@id/bp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/grey_border">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more"
+                android:textSize="12sp"
+                android:textColor="@color/light_grey"
+                android:fontFamily="@font/lato"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/top_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/q"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"/>
+
+        <RelativeLayout
+            android:id="@+id/bottom_border"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_cont"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

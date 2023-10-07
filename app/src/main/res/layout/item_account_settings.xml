@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/top_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/grey_circle"
+            android:src="@drawable/back"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="1dp"
+            android:contentDescription="@string/todo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/redact"
+            android:textSize="14sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/cool"
+            android:gravity="center"
+            android:fontFamily="@font/lato"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/sw_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/top_rel"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_light_grey">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/redact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/red"
+            android:gravity="center"
+            android:textColor="@color/light_grey"
+            android:background="@drawable/btn_grad"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/preview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/preview_text"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/cool"
+            android:textSize="14sp"
+            android:fontFamily="@font/lato"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

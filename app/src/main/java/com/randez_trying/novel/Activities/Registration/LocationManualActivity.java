@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.RequestHandler;
-import com.randez_trying.novel.Database.StaticHelper;
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.R;
 

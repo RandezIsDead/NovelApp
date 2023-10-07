@@ -4,42 +4,100 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="10dp"
-        android:padding="3dp"
-        android:visibility="gone"
-        android:contentDescription="@string/todo"/>
-
-    <TextView
-        android:id="@+id/text"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/input_text"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_toStartOf="@id/select_btn"
-        android:layout_toEndOf="@id/image"
-        android:layout_centerVertical="true"
-        android:textSize="16sp"
-        android:textColor="@color/cool"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_vertical"
-        android:fontFamily="@font/lato"/>
-
-    <ImageView
-        android:id="@+id/select_btn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/not_selected"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:contentDescription="@string/todo"/>
+        android:inputType="text|textCapSentences|textMultiLine"
+        android:textSize="14sp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="10dp"
+        android:background="@drawable/btn_light_grey"
+        android:maxLength="300"
+        android:textColor="@color/grey"
+        android:hint="@string/abm"
+        android:fontFamily="@font/lato"
+        android:textColorHint="@color/other_grey"
+        android:visibility="gone"/>
 
     <RelativeLayout
+        android:id="@+id/rel_seek"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/some_other_grey"
-        android:layout_below="@id/text"
-        android:layout_marginTop="4dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/seek_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_100just"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
+            android:fontFamily="@font/lato"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="120.0"
+            android:valueTo="220.0"
+            android:stepSize="1.0"
+            android:value="150"
+            android:layout_below="@id/seek_text"
+            android:layout_marginTop="12dp"
+            android:theme="@style/Base.Theme.Novel"
+            style="@style/RS"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:padding="3dp"
+            android:visibility="gone"
+            android:contentDescription="@string/todo"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_toStartOf="@id/select_btn"
+            android:layout_toEndOf="@id/image"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/cool"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/lato"/>
+
+        <ImageView
+            android:id="@+id/select_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/not_selected"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/some_other_grey"
+            android:layout_below="@id/text"
+            android:layout_marginTop="4dp"/>
+    </RelativeLayout>
 
 </RelativeLayout>
