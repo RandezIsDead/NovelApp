@@ -12,21 +12,29 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class Encrypt {
 
-    public static String encode(String s, String key) throws Exception {
-        SecretKeySpec keySpec = genPassword(key);
-        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, keySpec);
-        byte[] encValue = cipher.doFinal(s.getBytes());
-        return java.util.Base64.getEncoder().encodeToString(encValue);
+    public static String encode(String s, String key) {
+        try {
+            SecretKeySpec keySpec = genPassword(key);
+            @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec);
+            byte[] encValue = cipher.doFinal(s.getBytes());
+            return java.util.Base64.getEncoder().encodeToString(encValue);
+        } catch (Exception e) {
+            return s;
+        }
     }
 
-    public static String decode(byte[] bytes, String key) throws Exception {
-        String s = new String(bytes);
-        SecretKeySpec keySpec = genPassword(key);
-        @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.DECRYPT_MODE, keySpec);
-        byte[] toFirst = java.util.Base64.getDecoder().decode(s.getBytes());
-        return new String(cipher.doFinal(toFirst));
+    public static String decode(byte[] bytes, String key) {
+        try {
+            String s = new String(bytes);
+            SecretKeySpec keySpec = genPassword(key);
+            @SuppressLint("GetInstance") Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, keySpec);
+            byte[] toFirst = java.util.Base64.getDecoder().decode(s.getBytes());
+            return new String(cipher.doFinal(toFirst));
+        } catch (Exception e) {
+            return new String(bytes);
+        }
     }
 
     private static SecretKeySpec genPassword(String key) throws Exception {

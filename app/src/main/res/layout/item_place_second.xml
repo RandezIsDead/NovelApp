@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/lato"/>
+
+        <RelativeLayout
+            android:id="@+id/j"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name">
+
+            <ImageView
+                android:id="@+id/jp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/grey_pip"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/jp"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/j"
+            android:layout_marginTop="4dp">
+
+            <ImageView
+                android:id="@+id/gp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/grey_pip"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/gp"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/link_rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loc"
+            android:layout_marginTop="4dp">
+
+            <ImageView
+                android:id="@+id/l"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/grey_pip"
+                android:contentDescription="@string/todo" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/l"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:textSize="12sp"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/lato"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/info"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/btn_grad">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cont"
+            android:textSize="16sp"
+            android:textColor="@color/light_grey"
+            android:fontFamily="@font/lato"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

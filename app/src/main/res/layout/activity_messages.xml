@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
+
+    <RelativeLayout
+        android:id="@+id/top_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/back_grey"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="1dp"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/user_ico"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="9dp"
+            android:layout_toEndOf="@id/back"
+            android:layout_toStartOf="@id/user_ico">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_name_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:gravity="center"
+                android:fontFamily="@font/lato"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/user_name_age"
+                android:textSize="10sp"
+                android:textColor="@color/other_grey"
+                android:gravity="center"
+                android:fontFamily="@font/lato"
+                tools:ignore="SmallSp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/send_file"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/send_file"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/todo"/>
+
+    <ImageView
+        android:id="@+id/send"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/send_voice"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/todo"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_light_grey"
+        android:layout_toEndOf="@id/send_file"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/send">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/write_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="150dp"
+            android:background="@null"
+            android:fontFamily="@font/lato"
+            android:hint="@string/message"
+            android:inputType="text|textCapSentences|textMultiLine"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/other_grey"
+            android:layout_toStartOf="@id/sticker"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"/>
+
+        <ImageView
+            android:id="@+id/sticker"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/sticker"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_msg_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rel_input">
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_messages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="22dp"
+        android:layout_below="@id/top_rel"
+        android:layout_above="@id/rel_msg_edit"/>
+
+</RelativeLayout>

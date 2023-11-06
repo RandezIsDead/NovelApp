@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.randez_trying.novel.Activities.LoginActivity;
+import com.randez_trying.novel.Activities.LoginActivities.LoginActivity;
 import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Models.Credentials;
 import com.randez_trying.novel.Models.User;

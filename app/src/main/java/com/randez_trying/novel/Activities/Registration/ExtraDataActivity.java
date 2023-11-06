@@ -76,40 +76,36 @@ public class ExtraDataActivity extends AppCompatActivity {
                             @Override
                             protected Map<String, String> getParams() {
                                 Map<String, String> params = new HashMap<>();
-                                try {
-                                    params.put("personalId", StaticHelper.myCredentials.getPersonalId());
-                                    params.put("bDate", Encrypt.encode(StaticHelper.me.getbDate(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("balance", Encrypt.encode(StaticHelper.me.getBalance(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("city", Encrypt.encode(StaticHelper.me.getCity(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("company", Encrypt.encode(StaticHelper.me.getCompany(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("education", Encrypt.encode(StaticHelper.me.getEducation(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("growth", Encrypt.encode(StaticHelper.me.getGrowth(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("interests", Encrypt.encode(StaticHelper.me.getInterests(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("job", Encrypt.encode(StaticHelper.me.getJob(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("languages", Encrypt.encode(StaticHelper.me.getLanguages(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("mediaLinks", Encrypt.encode(StaticHelper.me.getMediaLinks(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("name", Encrypt.encode(StaticHelper.me.getName(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("gender", Encrypt.encode(StaticHelper.me.getGender(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("about", Encrypt.encode(StaticHelper.me.getAbout(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("familyPlans", Encrypt.encode(StaticHelper.me.getFamilyPlans(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("relationshipGoals", Encrypt.encode(StaticHelper.me.getRelationshipGoals(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("sports", Encrypt.encode(StaticHelper.me.getSports(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("alcohol", Encrypt.encode(StaticHelper.me.getAlcohol(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("smoke", Encrypt.encode(StaticHelper.me.getSmoke(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("personalityType", Encrypt.encode(StaticHelper.me.getPersonalityType(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("socialMediaLinks", Encrypt.encode(StaticHelper.me.getSocialMediaLinks(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("status", Encrypt.encode(StaticHelper.me.getStatus(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("subscriptionType", Encrypt.encode(StaticHelper.me.getSubscriptionType(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("zodiacSign", Encrypt.encode(StaticHelper.me.getZodiacSign(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("playlist", Encrypt.encode(StaticHelper.me.getPlaylist(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("location", Encrypt.encode(StaticHelper.me.getLocation(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("talkStyle", Encrypt.encode(StaticHelper.me.getTalkStyle(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("loveLang", Encrypt.encode(StaticHelper.me.getLoveLang(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("pets", Encrypt.encode(StaticHelper.me.getPets(), StaticHelper.myCredentials.getPersonalId()));
-                                    params.put("food", Encrypt.encode(StaticHelper.me.getFood(), StaticHelper.myCredentials.getPersonalId()));
-                                } catch (Exception e) {
-                                    throw new RuntimeException(e);
-                                }
+                                params.put("personalId", StaticHelper.myCredentials.getPersonalId());
+                                params.put("bDate", Encrypt.encode(StaticHelper.me.getbDate(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("balance", Encrypt.encode(StaticHelper.me.getBalance(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("city", Encrypt.encode(StaticHelper.me.getCity(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("company", Encrypt.encode(StaticHelper.me.getCompany(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("education", Encrypt.encode(StaticHelper.me.getEducation(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("growth", Encrypt.encode(StaticHelper.me.getGrowth(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("interests", Encrypt.encode(StaticHelper.me.getInterests(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("job", Encrypt.encode(StaticHelper.me.getJob(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("languages", Encrypt.encode(StaticHelper.me.getLanguages(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("mediaLinks", Encrypt.encode(StaticHelper.me.getMediaLinks(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("name", Encrypt.encode(StaticHelper.me.getName(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("gender", Encrypt.encode(StaticHelper.me.getGender(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("about", Encrypt.encode(StaticHelper.me.getAbout(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("familyPlans", Encrypt.encode(StaticHelper.me.getFamilyPlans(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("relationshipGoals", Encrypt.encode(StaticHelper.me.getRelationshipGoals(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("sports", Encrypt.encode(StaticHelper.me.getSports(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("alcohol", Encrypt.encode(StaticHelper.me.getAlcohol(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("smoke", Encrypt.encode(StaticHelper.me.getSmoke(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("personalityType", Encrypt.encode(StaticHelper.me.getPersonalityType(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("socialMediaLinks", Encrypt.encode(StaticHelper.me.getSocialMediaLinks(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("status", Encrypt.encode(StaticHelper.me.getStatus(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("subscriptionType", Encrypt.encode(StaticHelper.me.getSubscriptionType(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("zodiacSign", Encrypt.encode(StaticHelper.me.getZodiacSign(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("playlist", Encrypt.encode(StaticHelper.me.getPlaylist(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("location", Encrypt.encode(StaticHelper.me.getLocation(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("talkStyle", Encrypt.encode(StaticHelper.me.getTalkStyle(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("loveLang", Encrypt.encode(StaticHelper.me.getLoveLang(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("pets", Encrypt.encode(StaticHelper.me.getPets(), StaticHelper.myCredentials.getPersonalId()));
+                                params.put("food", Encrypt.encode(StaticHelper.me.getFood(), StaticHelper.myCredentials.getPersonalId()));
                                 return params;
                             }
                         };
@@ -146,8 +142,6 @@ public class ExtraDataActivity extends AppCompatActivity {
                         recyclerView.setAdapter(new ExtraDataAdapter(getApplicationContext()));
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp">
+    
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/todo"/>
+
+    <ImageView
+        android:id="@+id/img_add"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:contentDescription="@string/todo"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_name_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_img"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/lato"
+        android:textColor="@color/grey"
+        android:textSize="9sp"
+        android:layout_centerHorizontal="true"
+        tools:ignore="SmallSp" />
+
+</RelativeLayout>

@@ -3,7 +3,9 @@ package com.randez_trying.novel.Activities;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -19,19 +21,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.randez_trying.novel.Activities.MainFragments.DialogActivities.MessagesActivity;
+import com.randez_trying.novel.Database.Constants;
+import com.randez_trying.novel.Database.RequestHandler;
 import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
 import com.randez_trying.novel.Views.TagView.TagContainerLayout;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private boolean canWrite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.rec_view_layout);
 
         User user = new Gson().fromJson(getIntent().getStringExtra("user"), new TypeToken<User>() {}.getType());
+        if (Objects.equals(getIntent().getStringExtra("msg"), "true")) canWrite = true;
 
         RecyclerView recyclerView = findViewById(R.id.rec_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -60,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    private static class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHolder> {
+    private class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.ViewHolder> {
         private final Context context;
         private final Activity activity;
         private final User user;
@@ -85,9 +98,77 @@ public class ProfileActivity extends AppCompatActivity {
             if (position == 0) {
                 holder.vp.setAdapter(new VPAdapter(context, Arrays.asList(user.getMediaLinks().split("&"))));
 
+                if (canWrite) {
+                    holder.gift.setVisibility(View.VISIBLE);
+                    holder.write.setVisibility(View.VISIBLE);
+                }
+
                 holder.back.setOnClickListener(v -> {
                     activity.overridePendingTransition(R.anim.left_in, R.anim.right_out);
                     activity.finish();
+                });
+                holder.gift.setOnClickListener(v -> {
+                    android.app.Dialog dialogWindow = new android.app.Dialog(v.getRootView().getContext());
+
+                    dialogWindow.setContentView(R.layout.alert_gift_crystals);
+                    Objects.requireNonNull(dialogWindow.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                    final int[] crystals = {1};
+                    TextView cryCounter = dialogWindow.findViewById(R.id.exc_counter);
+                    ImageView plus = dialogWindow.findViewById(R.id.plus);
+                    ImageView minus = dialogWindow.findViewById(R.id.minus);
+                    TextView cancel = dialogWindow.findViewById(R.id.cancel);
+                    TextView cont = dialogWindow.findViewById(R.id.cont);
+                    StaticHelper.setCoolTextGradient(cont);
+
+                    cryCounter.setText(String.valueOf(1));
+                    cancel.setOnClickListener(vi -> dialogWindow.dismiss());
+                    plus.setOnClickListener(vi -> {
+                        crystals[0]++;
+                        cryCounter.setText(String.valueOf(crystals[0]));
+                    });
+                    minus.setOnClickListener(vi -> {
+                        if (crystals[0] > 1) {
+                            crystals[0]--;
+                            cryCounter.setText(String.valueOf(crystals[0]));
+                        }
+                    });
+                    cont.setOnClickListener(vi -> {
+                        if (!StaticHelper.me.getBalance().isEmpty()
+                                && Integer.parseInt(StaticHelper.me.getBalance()) >= crystals[0]) {
+                            StringRequest stringRequest2 = new StringRequest(Request.Method.POST, Constants.URL_ADD_TRANSACTION,
+                                    response2 -> StaticHelper.me.setBalance(
+                                            String.valueOf(Integer.parseInt(StaticHelper.me.getBalance()) - crystals[0])
+                                    ),
+                                    System.out::println){
+                                @Override
+                                protected Map<String, String> getParams() {
+                                    Map<String, String> params = new HashMap<>();
+                                    try {
+                                        params.put("fromUser", StaticHelper.me.getPersonalId());
+                                        params.put("toUser", user.getPersonalId());
+                                        params.put("count", String.valueOf(crystals[0]));
+                                        params.put("whatBought", "crystal");
+                                        params.put("date", String.valueOf(System.currentTimeMillis()));
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    return params;
+                                }
+                            };
+
+                            RequestHandler.getInstance(context).addToRequestQueue(stringRequest2);
+                        }
+                        dialogWindow.dismiss();
+                    });
+
+                    dialogWindow.show();
+                });
+                holder.write.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, MessagesActivity.class);
+                    intent.putExtra("user", new Gson().toJson(user));
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 });
             } else if (position == 1) {
                 holder.nameAge.setText(user.getName() + ", " + StaticHelper.getAge(user.getbDate()));
@@ -180,10 +261,10 @@ public class ProfileActivity extends AppCompatActivity {
             return position;
         }
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
 
             public ViewPager2 vp;
-            public ImageView back;
+            public ImageView back, gift, write;
             public TextView aboutMe, nameAge, iSearch, myJob, distance;
             public TextView titleMains, titleLanguages, titleInterests, titleSports, titlePets;
             public TagContainerLayout mainTags, langTags, interestsTags, sportsTag, petsTags;
@@ -191,6 +272,8 @@ public class ProfileActivity extends AppCompatActivity {
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 back = itemView.findViewById(R.id.back);
+                gift = itemView.findViewById(R.id.gift);
+                write = itemView.findViewById(R.id.write);
                 vp = itemView.findViewById(R.id.vp);
 
                 nameAge = itemView.findViewById(R.id.name);

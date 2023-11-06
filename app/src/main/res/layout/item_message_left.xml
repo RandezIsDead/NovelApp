@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/rel_msg"
+        android:layout_marginTop="-40dp"
+        android:contentDescription="@string/todo"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/user_img"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_light_grey"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:maxWidth="200dp"
+            android:textColor="@color/grey"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/text"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/text"
+            android:layout_marginTop="-12dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/grey"
+                tools:ignore="SmallSp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

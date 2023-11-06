@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,18 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Novel"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
             android:name=".Activities.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.VerifyEmailActivity" />
+        <activity android:name=".Activities.LoginActivities.LoginActivity" />
+        <activity android:name=".Activities.LoginActivities.VerifyEmailActivity" />
         <activity android:name=".Activities.Registration.EnterNameActivity" />
         <activity android:name=".Activities.Registration.EnterBirthDateActivity" />
         <activity android:name=".Activities.Registration.LocationActivity" />
@@ -38,15 +38,20 @@
         <activity android:name=".Activities.Registration.AboutMeActivity" />
         <activity android:name=".Activities.Registration.ExtraDataActivity" />
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.ProfileActivity"/>
-        <activity android:name=".Activities.PricingActivities.SubscribeActivity" />
-        <activity android:name=".Activities.PricingActivities.BuyBoostsActivity" />
-        <activity android:name=".Activities.PricingActivities.BuyCrystalsActivity" />
-        <activity android:name=".Activities.PricingActivities.ExchangeCrystalsActivity" />
-        <activity android:name=".Activities.PricingActivities.PayActivity" />
-        <activity android:name=".Activities.PricingActivities.PayResultActivity" />
+        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.SubscribeActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.BuyBoostsActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.BuyCrystalsActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.ExchangeCrystalsActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.PayActivity" />
+        <activity android:name=".Activities.MainFragments.PricingActivities.PayResultActivity" />
         <activity android:name=".Activities.MainFragments.SettingsActivities.AccountSettingsActivity" />
         <activity android:name=".Activities.MainFragments.SettingsActivities.FiltersSettingsActivity" />
+        <activity android:name=".Activities.MainFragments.MatchActivities.MatchActivity" />
+        <activity android:name=".Activities.MainFragments.MatchActivities.ViewMatchesActivity" />
+        <activity android:name=".Activities.MainFragments.DialogActivities.MessagesActivity" />
+        <activity android:name=".Activities.MainFragments.PlacesActivities.PlaceActivity"/>
+        <activity android:name=".Activities.MainFragments.SettingsActivities.VerifyAccActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

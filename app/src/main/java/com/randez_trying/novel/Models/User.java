@@ -1,7 +1,5 @@
 package com.randez_trying.novel.Models;
 
-import androidx.annotation.NonNull;
-
 public class User {
     private String bDate;
     private String balance;
@@ -36,6 +34,7 @@ public class User {
     private String loveLang;
     private String pets;
     private String food;
+    private String isOnline;
 
     public User(String bDate, String balance, String city,
                 String company, String education, String growth, String id,
@@ -43,7 +42,7 @@ public class User {
                 String name, String gender, String about, String familyPlans,
                 String relationshipGoals, String sports, String alcohol, String smoke, String personalId, String personalityType,
                 String socialMediaLinks, String status, String subscriptionType, String zodiacSign,
-                String playlist, String location, String talkStyle, String loveLang, String pets, String food) {
+                String playlist, String location, String talkStyle, String loveLang, String pets, String food, String isOnline) {
         this.relationshipGoals = relationshipGoals;
         this.sports = sports;
         this.alcohol = alcohol;
@@ -75,6 +74,7 @@ public class User {
         this.loveLang = loveLang;
         this.pets = pets;
         this.food = food;
+        this.isOnline = isOnline;
     }
 
     public User() {
@@ -227,6 +227,8 @@ public class User {
     public void setPets(String pets) {this.pets = pets;}
     public String getFood() {return food;}
     public void setFood(String food) {this.food = food;}
+    public String getIsOnline() {return isOnline;}
+    public void setIsOnline(String isOnline) {this.isOnline = isOnline;}
 
     @Override
     public String toString() {

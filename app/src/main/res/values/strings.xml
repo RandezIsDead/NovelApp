@@ -115,10 +115,34 @@
     <string name="extra_abilities_text">Расширь свои возможности</string>
     <string name="sport">Спорт</string>
     <string name="pets">Питомцы</string>
+    <string name="nverify_text">Пройдите\nверификацию с фото</string>
+    <string name="go_ver">Пройти</string>
+    <string name="find_love_text">Ищу любовь</string>
+    <string name="tp_text">Планы\nна сегодня</string>
+    <string name="me_friends_text">Будем\nдрузьями</string>
+    <string name="coffee_meet_text">Свидание\nза кофе</string>
+    <string name="new_matches_text">Новые пары</string>
+    <string name="it_s_a_match">It\'s a match</string>
+    <string name="start_messaging">Начни общение сейчас, не упусти свой шанс!</string>
+    <string name="start_talk">Начать общение</string>
+    <string name="show_profile">Смотреть профиль</string>
+    <string name="msgs">Сообщения</string>
+    <string name="view_likes">Посмотреть лайки</string>
+    <string name="message">Сообщение</string>
+    <string name="novel_hi">Привет, это NOVEL</string>
+    <string name="my_vibe">Почувствуй мой вайб...</string>
+    <string name="dates_text">Свидания</string>
+    <string name="nserials">Смотреть\nсериалы</string>
+    <string name="creative_text">Креативщики</string>
+    <string name="sports_text">Спортсмены</string>
+    <string name="nver_prof">Верификация\nвашего профиля</string>
+    <string name="ver_photo_text">Подтвердите своё фото</string>
+    <string name="_5_nerre">Сделай короткое видеоселфи на 5 секунд с краткой информацией о себе — возраст и имя\nПодтвердите,что на фото вы!</string>
+    <string name="text_ima">Удивляй с нами</string>
 
     <string-array name="range_slider">
         <item>0.0</item>
-        <item>10000.0</item>
+        <item>1000.0</item>
     </string-array>
     <string-array name="range_slider_age">
         <item>18.0</item>

@@ -22,15 +22,19 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.randez_trying.novel.Activities.MainFragments.AccountFragment;
-import com.randez_trying.novel.Activities.MainFragments.CafesFragment;
+import com.randez_trying.novel.Activities.MainFragments.PlacesFragment;
 import com.randez_trying.novel.Activities.MainFragments.DashboardFragment;
 import com.randez_trying.novel.Activities.MainFragments.MessagesFragment;
 import com.randez_trying.novel.Activities.MainFragments.SearchFragment;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
+import com.randez_trying.novel.Helpers.Encrypt;
 import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.Models.Credentials;
+import com.randez_trying.novel.Models.Match;
+import com.randez_trying.novel.Models.Message;
+import com.randez_trying.novel.Models.Place;
 import com.randez_trying.novel.Models.User;
 import com.randez_trying.novel.R;
 
@@ -39,7 +43,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,17 +54,22 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fm;
     private final SearchFragment searchFragment = new SearchFragment();
     private final DashboardFragment dashboardFragment = new DashboardFragment();
-    private final CafesFragment cafesFragment = new CafesFragment();
+    private final PlacesFragment placesFragment = new PlacesFragment();
     private final MessagesFragment messagesFragment = new MessagesFragment();
     private final AccountFragment accountFragment = new AccountFragment();
     private ImageView search, dashboard, cafes, messages, account;
     private final Handler balanceHandler = new Handler();
+    private final Handler dialogHandler = new Handler();
 
     @SuppressLint("SetTextI18n")
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_main);
         readPrefs();
+        pullMe();
+        getLikes();
+        getPlaces();
+        pullDialogs();
         fm = getSupportFragmentManager();
 
         RelativeLayout relFix = findViewById(R.id.rel_fix);
@@ -84,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(StaticHelper.me.getMediaLinks().split("&")[0]).circleCrop().into(account);
         getLocation();
-        pullMe();
         updateHandler();
 
         StaticHelper.getInterests(getApplicationContext());
@@ -110,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (StaticHelper.filterUser == null) StaticHelper.filterUser = new User();
         if (s1.isEmpty()) StaticHelper.minDistance = 0;
         else StaticHelper.minDistance = Integer.parseInt(s1);
-        if (s2.isEmpty()) StaticHelper.maxDistance = 10000;
+        if (s2.isEmpty()) StaticHelper.maxDistance = 1000;
         else StaticHelper.maxDistance = Integer.parseInt(s2);
         if (s3.isEmpty()) StaticHelper.minAge = 18;
         else StaticHelper.minAge = Integer.parseInt(s3);
@@ -130,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (window == 2) {
             setDefColors();
             cafes.setImageResource(R.drawable.cafes_selected);
-            fm.beginTransaction().replace(R.id.container, cafesFragment).commit();
+            fm.beginTransaction().replace(R.id.container, placesFragment).commit();
         } else if (window == 3) {
             setDefColors();
             messages.setImageResource(R.drawable.messages_selected);
@@ -198,6 +209,38 @@ public class MainActivity extends AppCompatActivity {
         RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequestCred);
     }
 
+    private void getLikes() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_GET_LIKES,
+                response -> {
+                    try {
+                        JSONArray o = new JSONArray(response);
+
+                        List<Match> matches = new ArrayList<>();
+                        for (int i = 0; i < o.length(); i++) {
+                            JSONObject jsonObject = o.getJSONObject(i);
+                            matches.add(new Match(
+                                    jsonObject.getString("userOne"),
+                                    jsonObject.getString("userTwo")
+                            ));
+                        }
+                        StaticHelper.matches = matches;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("personalId", StaticHelper.me.getPersonalId());
+                return params;
+            }
+        };
+        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
     private void updateBalance() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_GET_TRANSACTIONS,
                 response -> {
@@ -248,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
         RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
-    public void getLocation() {
+    private void getLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         String bestProvider = locationManager.getBestProvider(new Criteria(), false);
         if (ActivityCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION") == 0
@@ -272,6 +315,81 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void getPlaces() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_GET_PLACES,
+                response -> {
+                    try {
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i < array.length(); i++) {
+                            //TODO not show not my city places
+//                            if (StaticHelper.me.getCity().equals(Encrypt.decode(array.getJSONObject(i).getString("city").getBytes(), "0"))) {
+                                StaticHelper.places.add(new Place(
+                                        Encrypt.decode(array.getJSONObject(i).getString("categoryId").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("city").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("name").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("description").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("image").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("address").getBytes(), "0"),
+                                        Encrypt.decode(array.getJSONObject(i).getString("link").getBytes(), "0")
+                                ));
+//                            }
+                        }
+                        StaticHelper.places.add(0, null);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                return new HashMap<>();
+            }
+        };
+
+        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void pullDialogs() {
+        Runnable runnable = this::pullDialogs;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_GET_MESSAGES,
+                response -> {
+                    try {
+                        JSONArray o = new JSONArray(response);
+                        List<Message> messageList = new ArrayList<>();
+
+                        for (int i = 0; i < o.length(); i++) {
+                            JSONObject jsonObject = o.getJSONObject(i);
+                            messageList.add(new Message(
+                                    jsonObject.getString("messageId"),
+                                    jsonObject.getString("dialogId"),
+                                    jsonObject.getString("text"),
+                                    jsonObject.getString("sender"),
+                                    jsonObject.getString("receiver"),
+                                    jsonObject.getString("sendTime"),
+                                    jsonObject.getString("isMedia"),
+                                    jsonObject.getString("isRead")
+                            ));
+                        }
+                        Collections.sort(messageList);
+                        StaticHelper.messages = messageList;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                },
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("personalId", StaticHelper.me.getPersonalId());
+                return params;
+            }
+        };
+        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+        dialogHandler.postDelayed(runnable, 2000);
+    }
+
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 476) {
@@ -282,5 +400,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else Prefs.write(getApplicationContext(), "getLocation", "false");
         } else Prefs.write(getApplicationContext(), "getLocation", "false");
+    }
+
+    public void updateUserOnline(String isOnline) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_UPDATE_USER_ONLINE,
+                System.out::println,
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("personalId", StaticHelper.me.getPersonalId());
+                params.put("isOnline", Encrypt.encode(isOnline, StaticHelper.me.getPersonalId()));
+                return params;
+            }
+        };
+        RequestHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserOnline("true");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        updateUserOnline("false");
     }
 }

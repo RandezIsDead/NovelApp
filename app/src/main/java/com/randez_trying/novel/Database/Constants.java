@@ -21,10 +21,19 @@ public class Constants {
     public static final String URL_GET_USER = "https://scripsit-itaque.ru/novel/users/getUser.php";
     public static final String URL_GET_USERS = "https://scripsit-itaque.ru/novel/users/getUsers.php";
     public static final String URL_UPDATE_USER = "https://scripsit-itaque.ru/novel/users/updateUser.php";
+    public static final String URL_UPDATE_USER_ONLINE = "https://scripsit-itaque.ru/novel/users/updateUserOnline.php";
+
+    public static final String URL_GET_PLACES = "https://scripsit-itaque.ru/novel/getPlaces.php";
 
     public static final String URL_GET_CARDS = "https://scripsit-itaque.ru/novel/users/getCards.php";
     public static final String URL_ADD_CARD = "https://scripsit-itaque.ru/novel/users/addCard.php";
 
     public static final String URL_GET_TRANSACTIONS = "https://scripsit-itaque.ru/novel/transactions/getTransactions.php";
     public static final String URL_ADD_TRANSACTION = "https://scripsit-itaque.ru/novel/transactions/addTransaction.php";
+
+    public static final String URL_ADD_LIKE = "https://scripsit-itaque.ru/novel/like/addLike.php";
+    public static final String URL_GET_LIKES = "https://scripsit-itaque.ru/novel/like/getLikes.php";
+
+    public static final String URL_ADD_MESSAGE = "https://scripsit-itaque.ru/novel/messages/sendMessage.php";
+    public static final String URL_GET_MESSAGES = "https://scripsit-itaque.ru/novel/messages/getMessages.php";
 }

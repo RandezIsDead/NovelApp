@@ -24,9 +24,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.randez_trying.novel.Activities.MainFragments.SettingsActivities.AccountSettingsActivity;
-import com.randez_trying.novel.Activities.PricingActivities.BuyBoostsActivity;
-import com.randez_trying.novel.Activities.PricingActivities.BuyCrystalsActivity;
-import com.randez_trying.novel.Activities.PricingActivities.SubscribeActivity;
+import com.randez_trying.novel.Activities.MainFragments.PricingActivities.BuyBoostsActivity;
+import com.randez_trying.novel.Activities.MainFragments.PricingActivities.BuyCrystalsActivity;
+import com.randez_trying.novel.Activities.MainFragments.PricingActivities.SubscribeActivity;
 import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 
@@ -86,7 +86,7 @@ public class AccountFragment extends Fragment {
                     RelativeLayout cont = bottomSheetDialog.findViewById(R.id.btn_cont);
                     bottomSheetDialog.show();
 
-                    if (boosts != null) boosts.setText("Бустов: " + 0);
+                    if (boosts != null) boosts.setText("Бустов: " + StaticHelper.me.getBoosts());
                     if (cont != null) cont.setOnClickListener(vi -> {
                         activity.startActivity(new Intent(context, BuyBoostsActivity.class));
                         activity.overridePendingTransition(R.anim.right_in, R.anim.left_out);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.randez_trying.novel.Activities.LoginActivities.LoginActivity;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.R;
 

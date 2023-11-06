@@ -419,7 +419,6 @@ public class TagContainerLayout extends ViewGroup {
         for (int i = position; i < mChildViews.size(); i++) {
             mChildViews.get(i).setTag(i);
         }
-        // TODO, make removed view null?
     }
 
     private void onRemoveConsecutiveTags(List<Integer> positions) {
@@ -434,7 +433,6 @@ public class TagContainerLayout extends ViewGroup {
         for (int i = smallestPosition; i < mChildViews.size(); i++) {
             mChildViews.get(i).setTag(i);
         }
-        // TODO, make removed view null?
     }
 
     private int[] onGetNewPosition(View view) {

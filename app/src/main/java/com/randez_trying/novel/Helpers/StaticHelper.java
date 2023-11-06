@@ -13,6 +13,9 @@ import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
 import com.randez_trying.novel.Models.Credentials;
+import com.randez_trying.novel.Models.Match;
+import com.randez_trying.novel.Models.Message;
+import com.randez_trying.novel.Models.Place;
 import com.randez_trying.novel.Models.User;
 
 import org.json.JSONArray;
@@ -30,6 +33,9 @@ public class StaticHelper {
 
     public static User me = new User();
     public static Credentials myCredentials = new Credentials();
+    public static List<Message> messages = new ArrayList<>();
+    public static List<Match> matches = new ArrayList<>();
+    public static List<Place> places = new ArrayList<>();
 
     //List of user options
     public static List<String> interests = new ArrayList<>();
@@ -40,7 +46,7 @@ public class StaticHelper {
 
     //Filters
     public static int minDistance = 0;
-    public static int maxDistance = 10000;
+    public static int maxDistance = 1000;
     public static int minAge = 18;
     public static int maxAge = 25;
     public static boolean showInRange = false;
@@ -56,38 +62,34 @@ public class StaticHelper {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                try {
-                    params.put("personalId", me.getPersonalId());
-                    params.put("city", Encrypt.encode(me.getCity(), me.getPersonalId()));
-                    params.put("balance", Encrypt.encode(me.getBalance(), me.getPersonalId()));
-                    params.put("company", Encrypt.encode(me.getCompany(), me.getPersonalId()));
-                    params.put("education", Encrypt.encode(me.getEducation(), me.getPersonalId()));
-                    params.put("growth", Encrypt.encode(me.getGrowth(), me.getPersonalId()));
-                    params.put("interests", Encrypt.encode(me.getInterests(), me.getPersonalId()));
-                    params.put("job", Encrypt.encode(me.getJob(), me.getPersonalId()));
-                    params.put("languages", Encrypt.encode(me.getLanguages(), me.getPersonalId()));
-                    params.put("mediaLinks", Encrypt.encode(me.getMediaLinks(), me.getPersonalId()));
-                    params.put("gender", Encrypt.encode(me.getGender(), me.getPersonalId()));
-                    params.put("about", Encrypt.encode(me.getAbout(), me.getPersonalId()));
-                    params.put("familyPlans", Encrypt.encode(me.getFamilyPlans(), me.getPersonalId()));
-                    params.put("relationshipGoals", Encrypt.encode(me.getRelationshipGoals(), me.getPersonalId()));
-                    params.put("sports", Encrypt.encode(me.getSports(), me.getPersonalId()));
-                    params.put("alcohol", Encrypt.encode(me.getAlcohol(), me.getPersonalId()));
-                    params.put("smoke", Encrypt.encode(me.getSmoke(), me.getPersonalId()));
-                    params.put("personalityType", Encrypt.encode(me.getPersonalityType(), me.getPersonalId()));
-                    params.put("socialMediaLinks", Encrypt.encode(me.getSocialMediaLinks(), me.getPersonalId()));
-                    params.put("zodiacSign", Encrypt.encode(me.getZodiacSign(), me.getPersonalId()));
-                    params.put("subscriptionType", Encrypt.encode(me.getSubscriptionType(), me.getPersonalId()));
-                    params.put("status", Encrypt.encode(me.getStatus(), me.getPersonalId()));
-                    params.put("playlist", Encrypt.encode(me.getPlaylist(), me.getPersonalId()));
-                    params.put("location", Encrypt.encode(me.getLocation(), me.getPersonalId()));
-                    params.put("talkStyle", Encrypt.encode(me.getTalkStyle(), me.getPersonalId()));
-                    params.put("loveLang", Encrypt.encode(me.getLoveLang(), me.getPersonalId()));
-                    params.put("pets", Encrypt.encode(me.getPets(), me.getPersonalId()));
-                    params.put("food", Encrypt.encode(me.getFood(), me.getPersonalId()));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                params.put("personalId", me.getPersonalId());
+                params.put("city", Encrypt.encode(me.getCity(), me.getPersonalId()));
+                params.put("balance", Encrypt.encode(me.getBalance(), me.getPersonalId()));
+                params.put("company", Encrypt.encode(me.getCompany(), me.getPersonalId()));
+                params.put("education", Encrypt.encode(me.getEducation(), me.getPersonalId()));
+                params.put("growth", Encrypt.encode(me.getGrowth(), me.getPersonalId()));
+                params.put("interests", Encrypt.encode(me.getInterests(), me.getPersonalId()));
+                params.put("job", Encrypt.encode(me.getJob(), me.getPersonalId()));
+                params.put("languages", Encrypt.encode(me.getLanguages(), me.getPersonalId()));
+                params.put("mediaLinks", Encrypt.encode(me.getMediaLinks(), me.getPersonalId()));
+                params.put("gender", Encrypt.encode(me.getGender(), me.getPersonalId()));
+                params.put("about", Encrypt.encode(me.getAbout(), me.getPersonalId()));
+                params.put("familyPlans", Encrypt.encode(me.getFamilyPlans(), me.getPersonalId()));
+                params.put("relationshipGoals", Encrypt.encode(me.getRelationshipGoals(), me.getPersonalId()));
+                params.put("sports", Encrypt.encode(me.getSports(), me.getPersonalId()));
+                params.put("alcohol", Encrypt.encode(me.getAlcohol(), me.getPersonalId()));
+                params.put("smoke", Encrypt.encode(me.getSmoke(), me.getPersonalId()));
+                params.put("personalityType", Encrypt.encode(me.getPersonalityType(), me.getPersonalId()));
+                params.put("socialMediaLinks", Encrypt.encode(me.getSocialMediaLinks(), me.getPersonalId()));
+                params.put("zodiacSign", Encrypt.encode(me.getZodiacSign(), me.getPersonalId()));
+                params.put("subscriptionType", Encrypt.encode(me.getSubscriptionType(), me.getPersonalId()));
+                params.put("status", Encrypt.encode(me.getStatus(), me.getPersonalId()));
+                params.put("playlist", Encrypt.encode(me.getPlaylist(), me.getPersonalId()));
+                params.put("location", Encrypt.encode(me.getLocation(), me.getPersonalId()));
+                params.put("talkStyle", Encrypt.encode(me.getTalkStyle(), me.getPersonalId()));
+                params.put("loveLang", Encrypt.encode(me.getLoveLang(), me.getPersonalId()));
+                params.put("pets", Encrypt.encode(me.getPets(), me.getPersonalId()));
+                params.put("food", Encrypt.encode(me.getFood(), me.getPersonalId()));
                 return params;
             }
         };
@@ -104,8 +106,6 @@ public class StaticHelper {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){
@@ -128,8 +128,6 @@ public class StaticHelper {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){
@@ -152,8 +150,6 @@ public class StaticHelper {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){
@@ -176,8 +172,6 @@ public class StaticHelper {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){
@@ -200,8 +194,6 @@ public class StaticHelper {
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){
@@ -274,6 +266,38 @@ public class StaticHelper {
         boolean se = !filterUser.getSmoke().isEmpty();
         boolean smoke = true;
         if (se) smoke = user.getSmoke().equals(filterUser.getSmoke());
+        //TODO
         return zodiac && iSearch && alcohol && smoke;
+    }
+
+    public static List<List<Message>> splitMessagesByDialogs(List<Message> messageList) {
+        List<List<Message>> dialogs = new ArrayList<>();
+        List<Message> temp = new ArrayList<>(messageList);
+        List<String> dialogIds = new ArrayList<>();
+
+        for (int i = 0; i < temp.size(); i++) {
+            String dialogId = temp.get(i).getDialogId();
+            boolean isExist = false;
+            for (int j = 0; j < dialogIds.size(); j++) {
+                if (dialogIds.get(j).equals(dialogId)) {
+                    isExist = true;
+                    break;
+                }
+            }
+            if (!isExist) dialogIds.add(dialogId);
+        }
+
+        for (int i = 0; i < dialogIds.size(); i++) {
+            String dId = dialogIds.get(i);
+            List<Message> arr = new ArrayList<>();
+            for (int j = 0; j < temp.size(); j++) {
+                if (temp.get(j).getDialogId().equals(dId)) {
+                    arr.add(temp.get(j));
+                }
+            }
+            dialogs.add(arr);
+        }
+
+        return dialogs;
     }
 }

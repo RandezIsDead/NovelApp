@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <RelativeLayout
+        android:id="@+id/rel_verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pink_bg"
+        android:layout_marginTop="26dp"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/lady"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerCrop"
+            android:paddingTop="16dp"
+            android:src="@drawable/lady_ver"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/ere"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="54dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/light_grey_multiline"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/ver"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/ere"
+            android:layout_toEndOf="@id/ere"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="-74dp"
+            android:layout_marginTop="-20dp"
+            android:src="@drawable/verified"
+            android:contentDescription="@string/todo"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            tools:ignore="RelativeOverlap">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_ver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/nverify_text"
+                android:textSize="16sp"
+                android:textColor="@color/light_grey"
+                android:fontFamily="@font/lato" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/verify_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_below="@id/text_ver"
+                android:text="@string/go_ver"
+                android:layout_marginTop="14dp"
+                android:paddingEnd="14dp"
+                android:paddingStart="14dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/btn_light_grey"
+                android:textSize="12sp"
+                android:textColor="@color/cool"
+                android:fontFamily="@font/lato" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:background="@color/light_grey">
 
     <RelativeLayout
         android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:layout_marginTop="16dp">
 
         <RelativeLayout
             android:id="@+id/rel_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            tools:ignore="RelativeOverlap">
 
             <ImageView
                 android:id="@+id/img"
@@ -46,10 +49,12 @@
 
     </RelativeLayout>
 
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_shorts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Dashboard"
-        android:gravity="center"/>
+        android:layout_below="@id/rel_top"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </RelativeLayout>

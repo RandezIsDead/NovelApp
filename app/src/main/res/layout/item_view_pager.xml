@@ -24,4 +24,30 @@
         android:paddingStart="1dp"
         android:contentDescription="@string/todo"/>
 
+    <ImageView
+        android:id="@+id/write"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/cool_circle"
+        android:src="@drawable/write_msg"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:contentDescription="@string/todo"/>
+
+    <ImageView
+        android:id="@+id/gift"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/grey_circle"
+        android:src="@drawable/gift_from_profile"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:contentDescription="@string/todo"/>
+
 </RelativeLayout>

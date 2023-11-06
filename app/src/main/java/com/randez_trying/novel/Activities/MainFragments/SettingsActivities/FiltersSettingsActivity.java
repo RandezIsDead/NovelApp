@@ -25,7 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.slider.RangeSlider;
-import com.randez_trying.novel.Activities.PricingActivities.SubscribeActivity;
+import com.randez_trying.novel.Activities.MainFragments.PricingActivities.SubscribeActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
@@ -253,8 +253,6 @@ public class FiltersSettingsActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
                         }
                     },
                     System.out::println){

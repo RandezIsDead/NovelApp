@@ -8,19 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.randez_trying.novel.Activities.ProfileActivity;
 import com.randez_trying.novel.Helpers.StaticHelper;
@@ -124,12 +119,12 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
 
         @Override
         public void onBindViewHolder(@NonNull PhotosAdapter.ViewHolder holder, int position) {
-//            RequestOptions requestOptions = new RequestOptions().transforms(new CenterCrop(), new RoundedCorners(50));
             Glide.with(context).load(urls.get(position)).into(holder.photo);
 
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, ProfileActivity.class);
                 intent.putExtra("user", new Gson().toJson(user));
+                intent.putExtra("msg", "false");
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.right_in, R.anim.left_out);
             });

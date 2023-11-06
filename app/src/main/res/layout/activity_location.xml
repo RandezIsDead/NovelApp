@@ -43,7 +43,6 @@
         android:alpha="0.8"
         android:fontFamily="@font/lato"/>
 
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/h1"
         android:layout_width="match_parent"

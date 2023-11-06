@@ -103,8 +103,6 @@ public class LocationManualActivity extends AppCompatActivity {
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
                 },
                 System.out::println){

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rel_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/logo_grad"
+                android:contentDescription="@string/todo"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/img"
+                android:fontFamily="@font/lato"
+                android:text="@string/novel"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/security"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/security"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:background="@drawable/grey_circle"
+            android:contentDescription="@string/todo"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_likes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top"
+        android:layout_marginTop="24dp"
+        android:textSize="14sp"
+        android:text="@string/new_matches_text"
+        android:textColor="@color/grey"
+        android:gravity="center"
+        android:fontFamily="@font/lato"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_likes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_likes"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/text_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rec_likes"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:text="@string/msgs"
+        android:textColor="@color/grey"
+        android:gravity="center"
+        android:fontFamily="@font/lato"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_sep1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@id/text_msg"
+        android:background="@color/other_grey"/>
+
+</RelativeLayout>

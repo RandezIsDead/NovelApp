@@ -18,8 +18,10 @@ import androidx.fragment.app.Fragment;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.randez_trying.novel.Activities.MainFragments.Adapters.CardStackAdapter;
 import com.randez_trying.novel.Activities.MainFragments.SettingsActivities.FiltersSettingsActivity;
+import com.randez_trying.novel.Activities.MainFragments.MatchActivities.MatchActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.RequestHandler;
 import com.randez_trying.novel.Helpers.StaticHelper;
@@ -97,6 +99,13 @@ public class SearchFragment extends Fragment {
                     .setInterpolator(new AccelerateInterpolator())
                     .build();
             manager.setSwipeAnimationSetting(setting);
+            if (!iAlreadyLiked(users.get(manager.getTopPosition()))) sendLike(users.get(manager.getTopPosition()));
+            if (checkMatch(users.get(manager.getTopPosition()))) {
+                Intent intent = new Intent(requireActivity().getApplicationContext(), MatchActivity.class);
+                intent.putExtra("user", new Gson().toJson(users.get(manager.getTopPosition())));
+                startActivity(intent);
+                requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out);
+            }
             stackView.swipe();
         });
         gift.setOnClickListener(v -> {
@@ -164,6 +173,55 @@ public class SearchFragment extends Fragment {
         return root;
     }
 
+    private boolean checkMatch(User user) {
+        String myId = StaticHelper.me.getPersonalId();
+        for (int i = 0; i < StaticHelper.matches.size(); i++) {
+            String userOneId = StaticHelper.matches.get(i).getUserOne();
+            String userTwoId = StaticHelper.matches.get(i).getUserTwo();
+
+            if ((userOneId.equals(myId) && userTwoId.equals(user.getPersonalId()))
+            || (userOneId.equals(user.getPersonalId()) && userTwoId.equals(myId))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean iAlreadyLiked(User user) {
+        for (int i = 0; i < StaticHelper.matches.size(); i++) {
+            String userOneId = StaticHelper.matches.get(i).getUserOne();
+            String userTwoId = StaticHelper.matches.get(i).getUserTwo();
+
+            if ((userOneId.equals(StaticHelper.me.getPersonalId())
+                    && userTwoId.equals(user.getPersonalId()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void sendLike(User user) {
+        StringRequest stringRequest2 = new StringRequest(Request.Method.POST, Constants.URL_ADD_LIKE,
+                System.out::println,
+                System.out::println){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                try {
+                    params.put("userOne", StaticHelper.me.getPersonalId());
+                    params.put("userTwo", user.getPersonalId());
+                    params.put("likedOneTwo", "true");
+                    params.put("likedTwoOne", "false");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return params;
+            }
+        };
+
+        RequestHandler.getInstance(requireActivity().getApplicationContext()).addToRequestQueue(stringRequest2);
+    }
+
     private void checkNewFilters() {
         Runnable runnable = this::checkNewFilters;
         if (!filter.toString().equals(StaticHelper.filterUser.toString())
@@ -224,7 +282,8 @@ public class SearchFragment extends Fragment {
                                     Encrypt.decode(jsonObject.getString("talkStyle").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("loveLang").getBytes(), personalId),
                                     Encrypt.decode(jsonObject.getString("pets").getBytes(), personalId),
-                                    Encrypt.decode(jsonObject.getString("food").getBytes(), personalId)
+                                    Encrypt.decode(jsonObject.getString("food").getBytes(), personalId),
+                                    Encrypt.decode(jsonObject.getString("isOnline").getBytes(), personalId)
                             );
                             //TODO booleans showInRange, verified
                             boolean addUserByAge = (StaticHelper.getAge(user.getbDate()) >= StaticHelper.minAge)

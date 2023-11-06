@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_info"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="30px"
+        android:elevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/todo"/>
+
+            <ImageView
+                android:id="@+id/dim"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/gradient_dim"
+                android:contentDescription="@string/todo"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/light_grey"
+                    android:fontFamily="@font/lato"/>
+
+                <RelativeLayout
+                    android:id="@+id/j"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name">
+
+                    <ImageView
+                        android:id="@+id/jp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/star"
+                        android:paddingTop="6dp"
+                        android:contentDescription="@string/todo" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/jp"
+                        android:layout_marginStart="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/some_other_grey"
+                        android:fontFamily="@font/lato"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/loc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/j"
+                    android:layout_marginTop="4dp">
+
+                    <ImageView
+                        android:id="@+id/gp"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/grey_pip"
+                        android:contentDescription="@string/todo" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/gp"
+                        android:layout_marginStart="4dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="12sp"
+                        android:textColor="@color/some_other_grey"
+                        android:fontFamily="@font/lato"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
