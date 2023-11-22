@@ -21,10 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import com.randez_trying.novel.R;
+import com.randez_trying.novel.Views.ShimmerLayout;
 
 import java.io.IOException;
-
-import io.supercharge.shimmerlayout.ShimmerLayout;
 
 public class RecordView extends RelativeLayout implements RecordLockViewListener {
 

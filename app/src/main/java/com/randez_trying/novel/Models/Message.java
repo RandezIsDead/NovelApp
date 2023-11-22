@@ -9,16 +9,18 @@ public class Message implements Comparable<Message> {
     private String text;
     private String sender;
     private String receiver;
+    private String replyMsgId;
     private String sendTime;
     private String isMedia;
     private String isRead;
 
-    public Message(String messageId, String dialogId, String text, String sender, String receiver, String sendTime, String isMedia, String isRead) {
+    public Message(String messageId, String dialogId, String text, String sender, String receiver, String replyMsgId, String sendTime, String isMedia, String isRead) {
         this.messageId = messageId;
         this.dialogId = dialogId;
         this.text = text;
         this.sender = sender;
         this.receiver = receiver;
+        this.replyMsgId = replyMsgId;
         this.sendTime = sendTime;
         this.isMedia = isMedia;
         this.isRead = isRead;
@@ -41,6 +43,8 @@ public class Message implements Comparable<Message> {
     public void setSender(String sender) {this.sender = sender;}
     public String getReceiver() {return receiver;}
     public void setReceiver(String receiver) {this.receiver = receiver;}
+    public String getReplyMsgId() {return replyMsgId;}
+    public void setReplyMsgId(String replyMsgId) {this.replyMsgId = replyMsgId;}
     public String getSendTime() {return sendTime;}
     public void setSendTime(String sendTime) {this.sendTime = sendTime;}
     public String getIsMedia() {return isMedia;}
@@ -57,6 +61,7 @@ public class Message implements Comparable<Message> {
                 ", text='" + text + '\'' +
                 ", sender='" + sender + '\'' +
                 ", receiver='" + receiver + '\'' +
+                ", replyMsgId='" + replyMsgId + '\'' +
                 ", sendTime='" + sendTime + '\'' +
                 ", isMedia='" + isMedia + '\'' +
                 ", isRead='" + isRead + '\'' +

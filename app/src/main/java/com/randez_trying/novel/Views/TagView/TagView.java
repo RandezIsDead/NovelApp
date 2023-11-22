@@ -458,7 +458,6 @@ public class TagView extends View {
         isViewSelectable = viewSelectable;
     }
 
-    //TODO change background color
     public void selectView() {
         if (isViewSelectable && !getIsViewSelected()) {
             this.isViewSelected = true;

@@ -25,29 +25,66 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:maxWidth="200dp"
-            android:textColor="@color/grey"/>
-
         <RelativeLayout
+            android:id="@+id/rel_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/text"
-            android:layout_marginStart="8dp"
-            android:layout_below="@id/text"
-            android:layout_marginTop="-12dp">
+            android:layout_marginBottom="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/btn_grey"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/reply_img"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/todo"
+                android:visibility="gone"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/time"
+                android:id="@+id/reply_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/grey"
-                tools:ignore="SmallSp" />
+                android:textSize="16sp"
+                android:maxWidth="200dp"
+                android:gravity="end"
+                android:textColor="@color/light_grey"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rel_reply">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:maxWidth="200dp"
+                android:textColor="@color/grey"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/text"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/text"
+                android:layout_marginTop="-12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textColor="@color/grey"
+                    tools:ignore="SmallSp" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </RelativeLayout>

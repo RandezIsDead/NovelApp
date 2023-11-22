@@ -36,6 +36,19 @@ public class User {
     private String food;
     private String isOnline;
 
+    //TODO status: init - 1000, max - 1560
+    // if status < 900: set status to 0;
+    // when first online while long time offline - 1000 + 200(2 days) + 50(verified)
+    // 3 reports - ban
+    // subscribe: +20 / +40 / +60
+    // crystals: if bought max - +50
+    // online: +1 once a day
+    // +1 for 50 swipes(100 max)
+    // +50 if user was popular(more liked) in 2 weeks
+    // +50 for verification
+    // +250 for buying boost(for 12 hours)
+    // if offline first month - -1 every day, if more - -2 every day(max 100)
+
     public User(String bDate, String balance, String city,
                 String company, String education, String growth, String id,
                 String interests, String job, String languages, String mediaLinks,
@@ -101,7 +114,7 @@ public class User {
         this.personalId = "";
         this.personalityType = "";
         this.socialMediaLinks = "";
-        this.status = "";
+        this.status = "1000";
         this.subscriptionType = "0";
         this.zodiacSign = "";
         this.playlist = "";

@@ -18,6 +18,7 @@ public class Constants {
 
     public static final String URL_GET_CREDENTIALS = "https://scripsit-itaque.ru/novel/users/getCredentials.php";
     public static final String URL_UPDATE_CREDENTIALS = "https://scripsit-itaque.ru/novel/users/updateCredentials.php";
+
     public static final String URL_GET_USER = "https://scripsit-itaque.ru/novel/users/getUser.php";
     public static final String URL_GET_USERS = "https://scripsit-itaque.ru/novel/users/getUsers.php";
     public static final String URL_UPDATE_USER = "https://scripsit-itaque.ru/novel/users/updateUser.php";
@@ -36,4 +37,7 @@ public class Constants {
 
     public static final String URL_ADD_MESSAGE = "https://scripsit-itaque.ru/novel/messages/sendMessage.php";
     public static final String URL_GET_MESSAGES = "https://scripsit-itaque.ru/novel/messages/getMessages.php";
+    public static final String URL_EDIT_MESSAGE = "https://scripsit-itaque.ru/novel/messages/editMessage.php";
+    public static final String URL_UPLOAD_VOICE_MESSAGE = "https://scripsit-itaque.ru/novel/messages/uploadAudio.php";
+    public static final String URL_GET_STICKERS = "https://scripsit-itaque.ru/novel/getStickers.php";
 }

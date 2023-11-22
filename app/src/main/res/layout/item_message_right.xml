@@ -6,6 +6,7 @@
     android:padding="10dp">
 
     <RelativeLayout
+        android:id="@+id/rel_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_cool"
@@ -16,39 +17,77 @@
         android:paddingEnd="12dp"
         tools:ignore="UselessParent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:maxWidth="200dp"
-            android:textColor="@color/light_grey"/>
-
         <RelativeLayout
+            android:id="@+id/rel_reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/text"
-            android:layout_marginStart="8dp"
-            android:layout_below="@id/text"
-            android:layout_marginTop="-12dp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/light_grey"
-                tools:ignore="SmallSp" />
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_cool_light"
+            android:visibility="gone">
 
             <ImageView
-                android:id="@+id/read_status"
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_toEndOf="@id/time"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/read"
-                android:visibility="gone"
-                android:contentDescription="@string/todo" />
+                android:id="@+id/reply_img"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="@string/todo"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reply_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:maxWidth="200dp"
+                android:gravity="end"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/light_grey"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rel_reply">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:maxWidth="200dp"
+                android:gravity="end"
+                android:textColor="@color/light_grey"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/text"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/text"
+                android:layout_marginTop="-12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textColor="@color/light_grey"
+                    tools:ignore="SmallSp" />
+
+                <ImageView
+                    android:id="@+id/read_status"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_toEndOf="@id/time"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/read"
+                    android:visibility="gone"
+                    android:contentDescription="@string/todo" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </RelativeLayout>

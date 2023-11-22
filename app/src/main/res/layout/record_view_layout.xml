@@ -12,11 +12,11 @@
     android:visibility="visible">
 
 
-    <io.supercharge.shimmerlayout.ShimmerLayout
+    <com.randez_trying.novel.Views.ShimmerLayout
         android:id="@+id/shimmer_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         app:shimmer_animation_duration="1500"
         app:shimmer_color="#ffffff"
         app:shimmer_reverse_animation="true">
@@ -40,7 +40,7 @@
 
 
         </LinearLayout>
-    </io.supercharge.shimmerlayout.ShimmerLayout>
+    </com.randez_trying.novel.Views.ShimmerLayout>
 
     <TextView
         android:id="@+id/recv_tv_cancel"

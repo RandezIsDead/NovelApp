@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rel_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_cool"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:id="@+id/rel_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/btn_cool_light"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/reply_img"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/todo"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reply_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:maxWidth="200dp"
+                android:gravity="end"
+                android:textColor="@color/light_grey"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rel_reply">
+
+            <RelativeLayout
+                android:id="@+id/rel_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rel_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/images"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:contentDescription="@string/todo"/>
+
+                    <TextView
+                        android:id="@+id/images_count"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:textSize="32sp"
+                        android:textColor="@color/light_grey"
+                        android:background="@drawable/dim_full"
+                        android:gravity="center"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/play_voice"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/send_text"
+                        android:padding="10dp"
+                        android:contentDescription="@string/todo"/>
+
+                    <SeekBar
+                        android:id="@+id/vis_view"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:progressDrawable="@drawable/seek_drawable"
+                        android:thumb="@drawable/thumb"
+                        android:layout_toEndOf="@id/play_voice"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/rel_content"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/rel_content"
+                android:layout_marginTop="-12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:textColor="@color/light_grey"
+                    tools:ignore="SmallSp" />
+
+                <ImageView
+                    android:id="@+id/read_status"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_toEndOf="@id/time"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/read"
+                    android:visibility="gone"
+                    android:contentDescription="@string/todo" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

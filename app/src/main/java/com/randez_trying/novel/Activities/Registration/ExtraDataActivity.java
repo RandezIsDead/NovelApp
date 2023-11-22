@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.randez_trying.novel.Activities.MainActivity;
+import com.randez_trying.novel.Activities.Mains.MainActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;

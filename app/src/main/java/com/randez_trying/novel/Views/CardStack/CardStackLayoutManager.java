@@ -12,6 +12,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.randez_trying.novel.Helpers.StaticHelper;
 import com.randez_trying.novel.R;
 import com.randez_trying.novel.Views.CardStack.Internal.CardStackSetting;
 import com.randez_trying.novel.Views.CardStack.Internal.CardStackSmoothScroller;
@@ -232,6 +233,7 @@ public class CardStackLayoutManager
             }
             new Handler().post(() -> {
                 listener.onCardSwiped(direction);
+                StaticHelper.swiped(direction);
                 View topView = getTopView();
                 if (topView != null) {
                     listener.onCardAppeared(getTopView(), state.topPosition);

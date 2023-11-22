@@ -1,6 +1,7 @@
 package com.randez_trying.novel.Helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.randez_trying.novel.Activities.Mains.Match.MatchActivity;
 import com.randez_trying.novel.Database.Constants;
 import com.randez_trying.novel.Database.Prefs;
 import com.randez_trying.novel.Database.RequestHandler;
@@ -17,6 +20,8 @@ import com.randez_trying.novel.Models.Match;
 import com.randez_trying.novel.Models.Message;
 import com.randez_trying.novel.Models.Place;
 import com.randez_trying.novel.Models.User;
+import com.randez_trying.novel.R;
+import com.randez_trying.novel.Views.CardStack.Direction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +48,7 @@ public class StaticHelper {
     public static List<String> sports = new ArrayList<>();
     public static List<String> pets = new ArrayList<>();
     public static List<String> food = new ArrayList<>();
+    public static List<String> stickers = new ArrayList<>();
 
     //Filters
     public static int minDistance = 0;
@@ -268,6 +274,13 @@ public class StaticHelper {
         if (se) smoke = user.getSmoke().equals(filterUser.getSmoke());
         //TODO
         return zodiac && iSearch && alcohol && smoke;
+    }
+
+    public static boolean like = false;
+    public static void swiped(Direction direction) {
+        if (direction == Direction.Right) {
+            like = true;
+        }
     }
 
     public static List<List<Message>> splitMessagesByDialogs(List<Message> messageList) {

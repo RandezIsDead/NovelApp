@@ -6,7 +6,13 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.randez_trying.novel.Models.Credentials;
+import com.randez_trying.novel.Models.Match;
+import com.randez_trying.novel.Models.Message;
+import com.randez_trying.novel.Models.Place;
 import com.randez_trying.novel.Models.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Prefs {
 
@@ -70,5 +76,45 @@ public class Prefs {
 
     public static void logout(Context context) {
         write(context, "me", null);
+    }
+
+    public static void saveLikes(Context context, List<Match> matches) {
+        writeObject(context, "likes", matches);
+    }
+
+    public static List<Match> getLikes(Context context) {
+        String json = getJson(context, "likes");
+        if (gson.fromJson(json, new TypeToken<List<Match>>() {}.getType()) == null) return new ArrayList<>();
+        else return gson.fromJson(json, new TypeToken<List<Match>>() {}.getType());
+    }
+
+    public static void savePlaces(Context context, List<Place> places) {
+        writeObject(context, "places", places);
+    }
+
+    public static List<Place> getPlaces(Context context) {
+        String json = getJson(context, "places");
+        if (gson.fromJson(json, new TypeToken<List<Place>>() {}.getType()) == null) return new ArrayList<>();
+        else return gson.fromJson(json, new TypeToken<List<Place>>() {}.getType());
+    }
+
+    public static void saveMessages(Context context, List<Message> messages) {
+        writeObject(context, "messages", messages);
+    }
+
+    public static List<Message> getMessages(Context context) {
+        String json = getJson(context, "messages");
+        if (gson.fromJson(json, new TypeToken<List<Message>>() {}.getType()) == null) return new ArrayList<>();
+        else return gson.fromJson(json, new TypeToken<List<Message>>() {}.getType());
+    }
+
+    public static void saveStickers(Context context, List<String> stickers) {
+        writeObject(context, "stickers", stickers);
+    }
+
+    public static List<String> getStickers(Context context) {
+        String json = getJson(context, "stickers");
+        if (gson.fromJson(json, new TypeToken<List<String>>() {}.getType()) == null) return new ArrayList<>();
+        else return gson.fromJson(json, new TypeToken<List<String>>() {}.getType());
     }
 }

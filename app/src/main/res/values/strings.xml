@@ -139,6 +139,10 @@
     <string name="ver_photo_text">Подтвердите своё фото</string>
     <string name="_5_nerre">Сделай короткое видеоселфи на 5 секунд с краткой информацией о себе — возраст и имя\nПодтвердите,что на фото вы!</string>
     <string name="text_ima">Удивляй с нами</string>
+    <string name="images">Изображения</string>
+    <string name="wanna_edit_msh">Хотите отредактировать сообщение?</string>
+    <string name="yep">Да</string>
+    <string name="editing">Редактирование</string>
 
     <string-array name="range_slider">
         <item>0.0</item>
